@@ -1,0 +1,13 @@
+{
+  "name": "public",
+  "authors": [
+    "daniiltserin <daniilborowkow@yandex.ru>"
+  ],
+  "description": "ui for laravel snippets",
+  "main": "-",
+  "license": "MIT",
+  "homepage": "",
+  "devDependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
