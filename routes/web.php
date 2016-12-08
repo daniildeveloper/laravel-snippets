@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(["prefix" => "shop"], function () {
+    Route::get("/", [
+        'uses' => "ShoppingCartController@showShopIndex"
+    ]);
+});
