@@ -1,5 +1,5 @@
 .thumbnail img {
-    max-height: 250px;
+    max-height: 100px !important;
 }
 .thumbnail .description {
     color: #7f7f7f;

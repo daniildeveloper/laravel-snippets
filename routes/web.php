@@ -17,7 +17,8 @@ Route::get('/', function () {
 
 Route::group(["prefix" => "shop"], function () {
     Route::get("/", [
-        'uses' => "ShoppingCartController@showShopIndex"
+        'uses' => "ShoppingCartController@showShopIndex",
+        "as" => "shop.index"
     ]);
     Route::get("seed", [
         "uses" => "ShoppingCartController@seed"

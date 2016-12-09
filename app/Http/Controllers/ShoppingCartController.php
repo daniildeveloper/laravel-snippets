@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -9,7 +10,10 @@ class ShoppingCartController extends Controller
 {
     public function showShopIndex()
     {
-        return view("shop.index");
+        $products = Product::all();
+        return view("shop.index", [
+            "products" => $products
+        ]);
     }
 
     public function seed()
