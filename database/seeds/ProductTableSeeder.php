@@ -1,18 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+use Illuminate\Database\Seeder;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
-class ShoppingCartController extends Controller
+class ProductTableSeeder extends Seeder
 {
-    public function showShopIndex()
-    {
-        return view("shop.index");
-    }
-
-    public function seed()
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
     {
         DB::table('products')->insert([
             'imagePath' => "/images/shop/book1.jpg",
@@ -42,7 +39,6 @@ class ShoppingCartController extends Controller
             "title" => "Vue js book",
             'description' => "One of the best front-end frameworks for web-application. Loved by laravel ecosystem.",
             "price" => 9]);
-        return redirect()->back();
     }
 
 }

@@ -19,4 +19,7 @@ Route::group(["prefix" => "shop"], function () {
     Route::get("/", [
         'uses' => "ShoppingCartController@showShopIndex"
     ]);
+    Route::get("seed", [
+        "uses" => "ShoppingCartController@seed"
+    ]);
 });
