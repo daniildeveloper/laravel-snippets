@@ -23,4 +23,8 @@ Route::group(["prefix" => "shop"], function () {
     Route::get("seed", [
         "uses" => "ShoppingCartController@seed"
     ]);
+    Route::get("add-to-cart/{id}", [
+        'uses' => "ShoppingCartController@addToCart",
+        "as" => "shop.to-cart"
+    ]);
 });

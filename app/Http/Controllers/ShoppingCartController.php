@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+
 
 class ShoppingCartController extends Controller
 {
@@ -16,12 +19,23 @@ class ShoppingCartController extends Controller
         ]);
     }
 
+    public function addToCart(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $oldCart = Session::has("cart") ? Session::get("cart") : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+        return redirect()->back();
+    }
+
     public function seed()
     {
         DB::table('products')->insert([
             'imagePath' => "/images/shop/book1.jpg",
             "title" => "Book",
-            'description' => "Super cool book",
+            'description' => "Super cool bo",
             "price" => 10
         ]);
         DB::table('products')->insert([
