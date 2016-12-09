@@ -29,7 +29,7 @@ class Cart
             'item' => $item];
 
         if ($this->items) {
-            if (array_key_exists($id, $this->items)) {
+            if (!array_key_exists($id, $this->items)) {
                 $storedItem = $this->items['id'];
             }
         }

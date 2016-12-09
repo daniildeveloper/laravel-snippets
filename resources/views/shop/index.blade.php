@@ -1,6 +1,6 @@
 @extends("layouts.master")
 
-@section("title")Shopping cart @endsection
+@section("title") Shopping cart @endsection
 
 @section("content")
     <div class="container">
