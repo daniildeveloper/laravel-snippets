@@ -20,7 +20,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#">
+                    <a href="{{url("/shop/cart")}}">
                         <i class="fa fa-shopping-cart"></i> Shopping cart
                         <span class="badge">{{\Illuminate\Support\Facades\Session::has("cart") ? \Illuminate\Support\Facades\Session::get("cart")->totalQty : ""}}</span>
                     </a>

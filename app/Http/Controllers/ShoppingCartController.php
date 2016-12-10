@@ -30,6 +30,11 @@ class ShoppingCartController extends Controller
         return redirect()->back();
     }
 
+    public function showCart() {
+//        dd(Session::get("cart"));
+        return view("shop.cart");
+    }
+
     public function seed()
     {
         DB::table('products')->insert([

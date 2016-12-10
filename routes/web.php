@@ -27,4 +27,8 @@ Route::group(["prefix" => "shop"], function () {
         'uses' => "ShoppingCartController@addToCart",
         "as" => "shop.to-cart"
     ]);
+    Route::get("cart", [
+        "uses" => "ShoppingCartController@showCart",
+        "as" => "shop.cart"
+    ]);
 });
