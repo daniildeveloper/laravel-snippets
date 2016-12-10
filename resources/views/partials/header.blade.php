@@ -23,6 +23,7 @@
                     <a href="{{url("/shop/cart")}}">
                         <i class="fa fa-shopping-cart"></i> Shopping cart
                         <span class="badge">{{\Illuminate\Support\Facades\Session::has("cart") ? \Illuminate\Support\Facades\Session::get("cart")->totalQty : ""}}</span>
+                        <span class="badge">${{\Illuminate\Support\Facades\Session::has("cart") ? \Illuminate\Support\Facades\Session::get("cart")->totalPrice : ""}}</span>
                     </a>
                 </li>
                 <li class="dropdown">

@@ -19,7 +19,19 @@
                     <div class="panel-body">
                         <ul class="list-group">
                             <li class="list-group-item">{{$item['item']["description"]}}</li>
-                            <li class="list-group-item"><span class="bold">${{$item['item']["price"]}}</span> x {{$item["qty"]}}</li>
+                            <li class="list-group-item clearfix">
+                                <span class="bold">${{$item['item']["price"]}}</span>
+                                <div class="pull-right">
+                                    <a href="{{url("shop/cart/decrement/".$item['item']["id"])}}" class="btn btn-danger">
+                                        <i class="fa fa-minus"></i>
+                                    </a>
+                                    <input type="text" value="{{$item["qty"]}}" class="cart-input">
+
+                                    <a href="{{url("shop/cart/increment/".$item['item']["id"])}}" class="btn btn-success">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>

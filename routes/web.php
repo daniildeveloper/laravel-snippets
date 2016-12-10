@@ -27,8 +27,20 @@ Route::group(["prefix" => "shop"], function () {
         'uses' => "ShoppingCartController@addToCart",
         "as" => "shop.to-cart"
     ]);
-    Route::get("cart", [
-        "uses" => "ShoppingCartController@showCart",
-        "as" => "shop.cart"
-    ]);
+
+    //cart
+    Route::group(['prefix' => 'cart'], function () {
+        Route::get("/", [
+            "uses" => "ShoppingCartController@showCart",
+            "as" => "shop.cart"
+        ]);
+        Route::get("/increment/{id}", [
+            'uses' => "ShoppingCartController@incrementItemInCart"
+        ]);
+        Route::get("/decrement/{id}", [
+            'uses' => "ShoppingCartController@decrementItemInCart"
+        ]);
+    });
+
+
 });

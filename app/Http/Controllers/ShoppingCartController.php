@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Session;
 
 class ShoppingCartController extends Controller
 {
+    /**
+     * show all wares
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showShopIndex()
     {
         $products = Product::all();
@@ -19,6 +23,12 @@ class ShoppingCartController extends Controller
         ]);
     }
 
+    /**
+     * add item to cart
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function addToCart(Request $request, $id)
     {
         $product = Product::find($id);
@@ -30,7 +40,28 @@ class ShoppingCartController extends Controller
         return redirect()->back();
     }
 
-    public function showCart() {
+    public function incrementItemInCart(Request $request, $id)
+    {
+        $this->addToCart($request, $id);
+
+        return redirect()->back();
+
+    }
+
+    public function decrementItemInCart(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $oldCart = Session::has("cart") ? Session::get("cart") : null;
+        $cart = new Cart($oldCart);
+        $cart->removeFromCart($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+        return redirect()->back();
+
+    }
+
+    public function showCart()
+    {
 //        dd(Session::get("cart"));
         return view("shop.cart");
     }
