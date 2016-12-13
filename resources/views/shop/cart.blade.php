@@ -22,12 +22,14 @@
                             <li class="list-group-item clearfix">
                                 <span class="bold">${{$item['item']["price"]}}</span>
                                 <div class="pull-right">
-                                    <a href="{{url("shop/cart/decrement/".$item['item']["id"])}}" class="btn btn-danger">
+                                    <a href="{{url("shop/cart/decrement/".$item['item']["id"])}}"
+                                       class="btn btn-danger">
                                         <i class="fa fa-minus"></i>
                                     </a>
                                     <input type="text" value="{{$item["qty"]}}" class="cart-input">
 
-                                    <a href="{{url("shop/cart/increment/".$item['item']["id"])}}" class="btn btn-success">
+                                    <a href="{{url("shop/cart/increment/".$item['item']["id"])}}"
+                                       class="btn btn-success">
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
@@ -36,10 +38,13 @@
                     </div>
                 </div>
             @endforeach
-
+            <div class="container">
+                <a type="button" href="{{route("checkout")}}" class="btn btn-success">Checkout</a>
+            </div>
         @else
             <p>You have no orders</p>
         @endif
+
     </div>
 
 @endsection

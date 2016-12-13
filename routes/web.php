@@ -40,7 +40,17 @@ Route::group(["prefix" => "shop"], function () {
         Route::get("/decrement/{id}", [
             'uses' => "ShoppingCartController@decrementItemInCart"
         ]);
+        Route::get("/checkout", [
+            "uses" => "ShoppingCartController@checkout",
+            "as" => "checkout"
+        ]);
+        Route::post("/checkout", [
+            "uses" => "ShoppingCartController@checkout",
+            "as" => "checkout"
+        ]);
     });
 
 
 });
+
+Auth::routes();
