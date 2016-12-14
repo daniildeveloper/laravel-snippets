@@ -66,6 +66,8 @@ class ShoppingCartController extends Controller
         return view("shop.cart");
     }
 
+
+
     public function checkout()
     {
         if (!Session::has("cart")) {

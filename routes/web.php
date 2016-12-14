@@ -54,3 +54,10 @@ Route::group(["prefix" => "shop"], function () {
 });
 
 Auth::routes();
+
+Route::group([
+    "prefix" => "json",
+
+], function () {
+    Route::get("shop", "JsonReturnController@getShop");
+});
