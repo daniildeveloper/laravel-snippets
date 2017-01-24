@@ -53,6 +53,8 @@ Route::group(["prefix" => "shop"], function () {
 
 });
 
+Route::get('/ref/{id}', 'ReferalProgram@refererToSession');
+
 Route::group(['prefix' => 'hayp'], function () {
     Route::get('/', 'HaypController@showIndex')->name('hayp');
     Route::get('/my', 'HaypController@showMyHayp')->name('my-hayp');

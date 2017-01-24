@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Referals;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -60,12 +62,18 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+    protected function create(Request $resuest, array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        // if ($request->session()->get('referer') !== null) {
+        //     $ref = new Referals();
+        //     $ref->user_id = Auth::user()->id;
+        //     $ref->referer = $request->session()->get('referer');
+        //     $referer->save();
+        // }
     }
 }
