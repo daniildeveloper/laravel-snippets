@@ -7,8 +7,6 @@
     
     
 ## TODO
-* E-commerce 
-    - Auth user
 * CRM
     - Create base CRM: entities - manager, client, order.
     - email configuration

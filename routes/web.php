@@ -70,3 +70,7 @@ Route::group([
     Route::get("shop", "JsonReturnController@getShop");
 });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use App\Referals;
-use Validator;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Validator;
 
 class RegisterController extends Controller
 {
@@ -20,7 +19,7 @@ class RegisterController extends Controller
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
-    */
+     */
 
     use RegistersUsers;
 
@@ -29,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -50,8 +49,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'name'     => 'required|max:255',
+            'email'    => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -62,18 +61,15 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(Request $resuest, array $data)
+    protected function create(array $data)
     {
+        $referer = session()->get("referer") ? session()->get('referer') : 0;
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name'     => $data['name'],
+            'email'    => $data['email'],
             'password' => bcrypt($data['password']),
+            'referer'  => $referer,
+            // 'money'    => DB::table('sales')->where('slug', 'register_bonus')->get()[0]->is_active === 1 ? 1000 : 0,
         ]);
-        // if ($request->session()->get('referer') !== null) {
-        //     $ref = new Referals();
-        //     $ref->user_id = Auth::user()->id;
-        //     $ref->referer = $request->session()->get('referer');
-        //     $referer->save();
-        // }
     }
 }
