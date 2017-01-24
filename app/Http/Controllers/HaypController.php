@@ -64,11 +64,22 @@ class HaypController extends Controller
 
     public function showMyHayp()
     {
+        //array of items to display in blade template
         $items = [];
-        //получаем все итемы юзера
+        //in `users_items` table i store only ids. I need values
         $items_list = DB::table("users_items")->where('user_id', Auth::user()->id)->get();
 
-        return view('hayp.my');
+
+
+        foreach ($items_list as $i) {
+            $item    = DB::table('hayp_items')->where('id', $i->item_id)->get()[0];
+            $items[] = $item;
+        }
+        // $total_count = $this->totalCountItems($items_list);
+
+        return view('hayp.my', [
+            'items' => $items_list,
+          ]);
 
     }
 
@@ -102,5 +113,19 @@ class HaypController extends Controller
         Queue::later($date, new CalculateProfit(Auth::user()->id, $id));
 
         return redirect()->back();
+    }
+
+    // ---------------------
+    // HELPERS
+    // ---------------------
+
+    public function totalCountItems($items)
+    {
+        $count = 0;
+        foreach ($items as $item) {
+          dd($items);
+            $count += $item->count;
+        }
+        return $count;
     }
 }
