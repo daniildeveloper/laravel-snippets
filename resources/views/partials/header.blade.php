@@ -17,8 +17,19 @@
             <ul class="nav navbar-nav">
 
                 <li><a href="{{url("/shop/")}}">Shop</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Hayp<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{route('hayp')}}">Hayp index</a></li>
+                        <li><a href="{{route('my-hayp')}}">My Hayp</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                @if(Auth::user() !== null)
+                    <li><a href="#">{{Auth::user()->money}} $</a></li>
+                @endif
                 <li>
                     <a href="{{url("/shop/cart")}}">
                         <i class="fa fa-shopping-cart"></i> Shopping cart

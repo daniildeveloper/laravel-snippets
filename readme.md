@@ -12,3 +12,10 @@
 * CRM
     - Create base CRM: entities - manager, client, order.
     - email configuration
+
+## Users roles
+  - 0 guest
+  - 1 logined user
+  - 2 moderator\user with more access
+  - 3 admin
+  - 777 owner

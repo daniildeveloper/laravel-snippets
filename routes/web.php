@@ -53,6 +53,12 @@ Route::group(["prefix" => "shop"], function () {
 
 });
 
+Route::group(['prefix' => 'hayp'], function () {
+    Route::get('/', 'HaypController@showIndex')->name('hayp');
+    Route::get('/my', 'HaypController@showMyHayp')->name('my-hayp');
+    Route::get('/buy-{id}', 'HaypController@buyItem');
+});
+
 Auth::routes();
 
 Route::group([
@@ -61,3 +67,4 @@ Route::group([
 ], function () {
     Route::get("shop", "JsonReturnController@getShop");
 });
+
