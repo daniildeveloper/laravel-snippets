@@ -11,46 +11,47 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::group(["prefix" => "shop"], function () {
     Route::get("/", [
-        'uses' => "ShoppingCartController@showShopIndex",
-        "as" => "shop.index"
+    'uses' => "ShoppingCartController@showShopIndex",
+    "as" => "shop.index"
     ]);
     Route::get("seed", [
-        "uses" => "ShoppingCartController@seed"
+    "uses" => "ShoppingCartController@seed"
     ]);
     Route::get("add-to-cart/{id}", [
-        'uses' => "ShoppingCartController@addToCart",
-        "as" => "shop.to-cart"
+    'uses' => "ShoppingCartController@addToCart",
+    "as" => "shop.to-cart"
     ]);
-
+    
     //cart
     Route::group(['prefix' => 'cart'], function () {
         Route::get("/", [
-            "uses" => "ShoppingCartController@showCart",
-            "as" => "shop.cart"
+        "uses" => "ShoppingCartController@showCart",
+        "as" => "shop.cart"
         ]);
         Route::get("/increment/{id}", [
-            'uses' => "ShoppingCartController@incrementItemInCart"
+        'uses' => "ShoppingCartController@incrementItemInCart"
         ]);
         Route::get("/decrement/{id}", [
-            'uses' => "ShoppingCartController@decrementItemInCart"
+        'uses' => "ShoppingCartController@decrementItemInCart"
         ]);
         Route::get("/checkout", [
-            "uses" => "ShoppingCartController@checkout",
-            "as" => "checkout"
+        "uses" => "ShoppingCartController@checkout",
+        "as" => "checkout"
         ]);
         Route::post("/checkout", [
-            "uses" => "ShoppingCartController@checkout",
-            "as" => "checkout"
+        "uses" => "ShoppingCartController@checkout",
+        "as" => "checkout"
         ]);
     });
-
-
+    
+    
 });
 
 Route::get('/ref/{id}', 'ReferalProgram@refererToSession');
@@ -64,7 +65,7 @@ Route::group(['prefix' => 'hayp'], function () {
 Auth::routes();
 
 Route::group([
-    "prefix" => "json",
+"prefix" => "json",
 
 ], function () {
     Route::get("shop", "JsonReturnController@getShop");
