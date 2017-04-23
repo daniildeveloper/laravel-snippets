@@ -42,8 +42,8 @@ Route::group(["prefix" => "shop"], function () {
         'uses' => "ShoppingCartController@decrementItemInCart"
         ]);
         Route::get("/checkout", [
-        "uses" => "ShoppingCartController@checkout",
-        "as" => "checkout"
+        "uses" => "ShoppingCartController@getCheckout",
+        "as" => "checkoutview"
         ]);
         Route::post("/checkout", [
         "uses" => "ShoppingCartController@checkout",
