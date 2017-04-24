@@ -19,8 +19,7 @@
                 <div class="col-md-4">
                 </div>
                 <div class="col-md-4">
-                    <script src="https://js.stripe.com/v2/" type="text/javascript">
-                    </script>
+                    
                     <form accept-charset="UTF-8" action="/" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" id="payment-form" method="post">
                         <div style="margin:0;padding:0;display:inline">
                             <input name="utf8" type="hidden" value="✓"/>
@@ -32,10 +31,21 @@
                                 <label class="control-label">
                                     Name on Card
                                 </label>
-                                <input class="form-control" size="4" type="text">
+                                <input id="name" class="form-control" size="4" type="text">
                                 </input>
                             </div>
                         </div>
+
+                        <div class="form-row">
+                            <div class="col-xs-12 form-group required">
+                                <label class="control-label">
+                                    Address:
+                                </label>
+                                <input class="form-control card-address" size="4" type="text">
+                                </input>
+                            </div>
+                        </div>
+
                         <div class="form-row">
                             <div class="col-xs-12 form-group card required">
                                 <label class="control-label">
@@ -76,8 +86,8 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-12 error form-group hide">
-                                <div class="alert-danger alert">
-                                    Please correct the errors and try again.
+                                <div id="charge-error" class="alert-danger alert">
+                                    
                                 </div>
                             </div>
                         </div>
@@ -87,4 +97,10 @@
         </div>
     </form>
 </div>
+@endsection
+
+@section("scripts")
+<script src="https://js.stripe.com/v2/" type="text/javascript">
+                    </script>
+<script src="{{asset("js/checkout.js")}}"></script>
 @endsection
