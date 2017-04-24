@@ -1,4 +1,4 @@
-@extends("shop.master")
+@extends("layouts.master")
 
 @section("title") Shopping cart | Items @endsection
 
@@ -39,7 +39,7 @@
                 </div>
             @endforeach
             <div class="container">
-                <a type="button" href="{{route("checkout")}}" class="btn btn-success">Checkout</a>
+                <a type="button" href="{{route("checkoutview")}}" class="btn btn-success">Checkout</a>
             </div>
         @else
             <p>You have no orders</p>

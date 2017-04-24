@@ -14,7 +14,16 @@
 </head>
 <body>
 @include("partials.header")
-@yield("content")
+<div class="container-fluid">
+  @if(isset($message))
+    <div class="alert alert-{{$messageStatus}}" role="alert">
+      {{$message}}
+    </div>
+  @endif
+  
+  @yield("content")
+</div>
+
 
 
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>

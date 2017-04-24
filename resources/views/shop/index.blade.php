@@ -1,4 +1,4 @@
-@extends("shop.master")
+@extends("layouts.master")
 
 @section("title") Shopping cart @endsection
 

@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
+use Stripe\Charge;
+use Stripe\Stripe;
 
 class ShoppingCartController extends Controller
 {
@@ -19,7 +19,7 @@ class ShoppingCartController extends Controller
     {
         $products = Product::all();
         return view("shop.index", [
-            "products" => $products
+            "products" => $products,
         ]);
     }
 
@@ -33,7 +33,7 @@ class ShoppingCartController extends Controller
     {
         $product = Product::find($id);
         $oldCart = Session::has("cart") ? Session::get("cart") : null;
-        $cart = new Cart($oldCart);
+        $cart    = new Cart($oldCart);
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
@@ -52,7 +52,7 @@ class ShoppingCartController extends Controller
     {
         $product = Product::find($id);
         $oldCart = Session::has("cart") ? Session::get("cart") : null;
-        $cart = new Cart($oldCart);
+        $cart    = new Cart($oldCart);
         $cart->removeFromCart($product, $product->id);
 
         $request->session()->put('cart', $cart);
@@ -68,8 +68,6 @@ class ShoppingCartController extends Controller
         return view("shop.cart");
     }
 
-
-
     public function getCheckout()
     {
         //have we cart already
@@ -78,15 +76,41 @@ class ShoppingCartController extends Controller
             return redirect("shop");
         }
         $oldCart = Session::get("cart");
-        $cart = new Cart($oldCart);
-        $total = $cart->totalPrice;
+        $cart    = new Cart($oldCart);
+        $total   = $cart->totalPrice;
 
         return view("shop.checkout", [
-            'total' => $total
+            'total' => $total,
         ]);
     }
 
-    public function checkout() {
-        
+    public function checkout(Request $request)
+    {
+        if (!Session::has("cart")) {
+            //if no cart, redirect to cart
+            return redirect("shop");
+        }
+
+        Stripe::setApiKey("sk_test_X9dtCSFHT6ymHhKWi2O0ke7k");
+
+        $oldCart = Session::get("cart");
+        $cart    = new Cart($oldCart);
+
+        try {
+            Charge::create([
+                "amont"       => $cart->totalPrice,
+                "currency"    => "usd",
+                "source"      => $request['stripeToken'],
+                "description" => "testCharge",
+
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route("shop.index", [
+                "message"       => $e->getMessage(),
+                "messageStatus" => "danger"]);
+        }
+
+        Session::forget("cart");
+        return redirect()->route("shop.index", ["message" => "You have byed some successfull", "messageStatus" => "success"]);
     }
 }

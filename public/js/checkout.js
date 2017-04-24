@@ -19,6 +19,7 @@ function stripeResponseHandler(status, response){
   if(response.error) {
     $errView.removeClass("hide");
     $errView.text(response.error.message);
+    console.log(response.error.message);
     $form.find("button").prop("disabled", false);
   } else {
     var token = response.id;

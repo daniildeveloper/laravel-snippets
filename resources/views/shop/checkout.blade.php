@@ -1,4 +1,4 @@
-@extends ("shop.master")
+@extends ("layouts.master")
 
 @section("title") Shopping Cart | Checkout @endsection
 
@@ -12,7 +12,7 @@
             Your total: ${{$total}}
         </h4>
     </div>
-    <form action="{{route("checkout")}}" method="post">
+    <form accept-charset="UTF-8" action="{{route("checkout")}}" class="require-validation" id="payment-form" method="post">
       {{csrf_field()}}
         <div class="container">
             <div class="row">
@@ -20,11 +20,8 @@
                 </div>
                 <div class="col-md-4">
                     
-                    <form accept-charset="UTF-8" action="/" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" id="payment-form" method="post">
+                    
                         <div style="margin:0;padding:0;display:inline">
-                            <input name="utf8" type="hidden" value="✓"/>
-                            <input name="_method" type="hidden" value="PUT"/>
-                            <input name="authenticity_token" type="hidden" value=""/>
                         </div>
                         <div class="form-row">
                             <div class="col-xs-12 form-group required">
@@ -91,7 +88,6 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>

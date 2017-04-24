@@ -41,7 +41,7 @@ Route::group(["prefix" => "shop"], function () {
         Route::get("/decrement/{id}", [
         'uses' => "ShoppingCartController@decrementItemInCart"
         ]);
-        Route::get("/checkout", [
+        Route::get("/checkoutView", [
         "uses" => "ShoppingCartController@getCheckout",
         "as" => "checkoutview"
         ]);
