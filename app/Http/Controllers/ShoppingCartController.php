@@ -98,13 +98,14 @@ class ShoppingCartController extends Controller
 
         try {
             Charge::create([
-                "amont"       => $cart->totalPrice,
+                "amount"       => $cart->totalPrice * 100,
                 "currency"    => "usd",
                 "source"      => $request['stripeToken'],
                 "description" => "testCharge",
 
             ]);
         } catch (\Exception $e) {
+            dd($e);
             return redirect()->route("shop.index", [
                 "message"       => $e->getMessage(),
                 "messageStatus" => "danger"]);
