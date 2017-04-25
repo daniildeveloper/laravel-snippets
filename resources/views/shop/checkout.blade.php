@@ -28,7 +28,7 @@
                                 <label class="control-label">
                                     Name on Card
                                 </label>
-                                <input id="name" class="form-control" size="4" type="text">
+                                <input id="name" name="name" class="form-control" size="4" type="text">
                                 </input>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                                 <label class="control-label">
                                     Address:
                                 </label>
-                                <input class="form-control card-address" size="4" type="text">
+                                <input name="address" class="form-control card-address" size="4" type="text">
                                 </input>
                             </div>
                         </div>
