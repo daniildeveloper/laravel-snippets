@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d9471be914288d2bfc7fcbcc2ba37628",
-    "content-hash": "cba428139b43d528a8d8282a336ebc12",
+    "hash": "5dcd811804545c277fa0bf048b9fda95",
+    "content-hash": "a4d44970a0157fce9ba2c6ba0212ee1b",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -162,6 +162,46 @@
             "time": "2015-11-06 14:35:42"
         },
         {
+            "name": "dosarkz/epay-kazcom",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dosarkz/epay-kazkom.git",
+                "reference": "e8cd9ab585db5da3565d5c9d59be69b3dc81352d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dosarkz/epay-kazkom/zipball/e8cd9ab585db5da3565d5c9d59be69b3dc81352d",
+                "reference": "e8cd9ab585db5da3565d5c9d59be69b3dc81352d",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.6"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/config",
+                    "src/Facades",
+                    "src/templates",
+                    "src/certificates"
+                ],
+                "psr-4": {
+                    "Dosarkz\\EpayKazcom\\Tests\\": "tests/",
+                    "Dosarkz\\EPayKazCom\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Yerzhan Ashenov",
+                    "email": "ashenov.e@gmail.com"
+                }
+            ],
+            "description": "Payment service from Kazkommertsbank",
+            "time": "2016-12-14 19:11:51"
+        },
+        {
             "name": "jakub-onderka/php-console-color",
             "version": "0.1",
             "source": {
@@ -305,6 +345,44 @@
                 "tokenizer"
             ],
             "time": "2016-12-07 09:37:55"
+        },
+        {
+            "name": "kolesa-team/qazkom-epay",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kolesa-team/qazkom-epay.git",
+                "reference": "06dfd019c826debca39b375883cac187be21c931"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kolesa-team/qazkom-epay/zipball/06dfd019c826debca39b375883cac187be21c931",
+                "reference": "06dfd019c826debca39b375883cac187be21c931",
+                "shasum": ""
+            },
+            "replace": {
+                "iborodikhin/kazkom-epay": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.6",
+                "squizlabs/php_codesniffer": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Epay\\": "src/",
+                    "Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Igor Borodikhin",
+                    "email": "iborodikhin@gmail.com"
+                }
+            ],
+            "description": "PHP library for Qazkom ePay",
+            "time": "2017-03-27 22:32:31"
         },
         {
             "name": "laravel/framework",
@@ -2078,12 +2156,12 @@
             "version": "0.9.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/mockery.git",
+                "url": "https://github.com/mockery/mockery.git",
                 "reference": "65d4ca18e15cb02eeb1e5336f884e46b9b905be0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/65d4ca18e15cb02eeb1e5336f884e46b9b905be0",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/65d4ca18e15cb02eeb1e5336f884e46b9b905be0",
                 "reference": "65d4ca18e15cb02eeb1e5336f884e46b9b905be0",
                 "shasum": ""
             },
@@ -3504,7 +3582,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "kolesa-team/qazkom-epay": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

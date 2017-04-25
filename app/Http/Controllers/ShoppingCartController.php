@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Stripe\Charge;
 use Stripe\Stripe;
 use \Auth;
+use Epay\Client;
 
 class ShoppingCartController extends Controller
 {

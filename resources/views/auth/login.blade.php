@@ -59,6 +59,10 @@
                                 </a>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <p>Don't have an account? <a href="{{url('/register')}}">Sign up</a></p>
+                        </div>
                     </form>
                 </div>
             </div>
