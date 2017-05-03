@@ -41,15 +41,15 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 //error format for api
-$app['Dingo\Api\Exception\Handler']->setErrorFormat([
-    'error' => [
-        'message'     => ':message',
-        'errors'      => ':errors',
-        'code'        => ':code',
-        'status_code' => ':status_code',
-        'debug'       => ':debug',
-    ],
-]);
+// $app['Dingo\Api\Exception\Handler']->setErrorFormat([
+//     'error' => [
+//         'message'     => ':message',
+//         'errors'      => ':errors',
+//         'code'        => ':code',
+//         'status_code' => ':status_code',
+//         'debug'       => ':debug',
+//     ],
+// ]);
 /*
 |--------------------------------------------------------------------------
 | Return The Application

@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+$api = app('Dingo\Api\Routing\Router');
+
+$api->version('v1', function ($api) {
+    $api->group(['prefix' => 'foo'], function ($api) {
+        // Endpoints registered here will have the "foo" middleware applied.
+        $api->get('test', 'App\Http\Controllers\API\ApiBaseController@test');
+    });
+});
