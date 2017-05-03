@@ -9,7 +9,8 @@
         "laravel/framework": "5.3.*",
         "stripe/stripe-php": "^4.8",
         "kolesa-team/qazkom-epay": "dev-master",
-        "dosarkz/epay-kazcom": "^1.0"
+        "dosarkz/epay-kazcom": "^1.0",
+        "dingo/api": "1.0.x@dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

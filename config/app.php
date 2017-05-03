@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
          Dosarkz\EPayKazCom\EpayServiceProvider::class,
+         Dingo\Api\Provider\LaravelServiceProvider::class,
 
         //
 
