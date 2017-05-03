@@ -168,6 +168,7 @@ return [
          */
          Dosarkz\EPayKazCom\EpayServiceProvider::class,
          Dingo\Api\Provider\LaravelServiceProvider::class,
+         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
         //
 
@@ -210,6 +211,8 @@ return [
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,

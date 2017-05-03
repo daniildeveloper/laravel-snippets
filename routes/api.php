@@ -23,5 +23,6 @@ $api->version('v1', function ($api) {
     $api->group(['prefix' => 'foo'], function ($api) {
         // Endpoints registered here will have the "foo" middleware applied.
         $api->get('test', 'App\Http\Controllers\API\ApiBaseController@test');
+        $api->get('err', 'App\Http\Controllers\API\ApiBaseController@err');
     });
 });

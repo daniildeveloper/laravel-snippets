@@ -16,4 +16,8 @@ class ApiBaseController extends Controller
       return $this->response()->array($products->toArray());
 
     }
+
+    public function err() {
+      return $this->response->error('This is an error. Fuck you', 404);
+    }
 }

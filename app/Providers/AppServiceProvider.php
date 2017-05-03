@@ -12,8 +12,11 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
-        //
+    {   
+        //create auth for api
+        app('Dingo\Api\Auth\Auth')->extend('jwt', function ($app) {
+            return new \Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
+        });
     }
 
     /**
