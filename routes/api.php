@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -25,5 +25,6 @@ $api->version('v1', function ($api) {
         $api->get('test', 'App\Http\Controllers\API\ApiBaseController@test');
         $api->get('err', 'App\Http\Controllers\API\ApiBaseController@err');
     });
-    $api->get("authenticate", "App\Http\Controllers\API\AuthenticateController@authenticate");
+    $api->resource("authenticate", "App\Http\Controllers\API\AuthenticateController", ["only" => ["index"]]);
+    $api->post("authenticate", "App\Http\Controllers\API\AuthenticateController@authenticate");
 });

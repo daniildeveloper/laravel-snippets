@@ -6,11 +6,27 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuthExceptions\JWTException;
+use App\User;
 
 class AuthenticateController extends Controller
 {
+    /**
+     * apply jwt.auth to all methods, except `authenticate`. It use for login
+     */
+    public function __construct()
+    {
+        $this->middleware("jwt.auth", ['except' => ["authenticate"]]);
+    }
+
+    /**
+     * example data. show all users
+     * @return 
+     */
     public function index()
     {
+      $users = User::all();
+
+      return $users;
 
     }
 
