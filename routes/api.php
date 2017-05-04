@@ -25,4 +25,5 @@ $api->version('v1', function ($api) {
         $api->get('test', 'App\Http\Controllers\API\ApiBaseController@test');
         $api->get('err', 'App\Http\Controllers\API\ApiBaseController@err');
     });
+    $api->get("authenticate", "App\Http\Controllers\API\AuthenticateController@authenticate");
 });
