@@ -11,7 +11,8 @@
         "kolesa-team/qazkom-epay": "dev-master",
         "dosarkz/epay-kazcom": "^1.0",
         "dingo/api": "1.0.x@dev",
-        "tymon/jwt-auth": "0.5.*"
+        "tymon/jwt-auth": "0.5.*",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

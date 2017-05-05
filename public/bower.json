@@ -9,5 +9,8 @@
   "homepage": "",
   "devDependencies": {
     "bootstrap": "^3.3.7"
+  },
+  "dependencies": {
+    "dropzone": "^4.3.0"
   }
 }

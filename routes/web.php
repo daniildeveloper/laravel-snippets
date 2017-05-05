@@ -77,3 +77,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::get("/test", "TestingIdeasController@test");
+
+Route::group(["prefix"=>"frontend"], function () {
+    Route::get("/", "FrontendController@index")->name("front");
+    Route::get("dropzone","FrontendController@dropzone")->name("dropzone");
+    Route::post("dropzone", "Frontend\BackendController@dropzone")->name("backend.dropzone");
+});

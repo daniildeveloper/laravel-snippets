@@ -25,6 +25,9 @@
                         <li><a href="{{route('my-hayp')}}">My Hayp</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="{{route("front")}}">Frontend</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if(Auth::user() !== null)
