@@ -82,4 +82,12 @@ Route::group(["prefix"=>"frontend"], function () {
     Route::get("/", "FrontendController@index")->name("front");
     Route::get("dropzone","FrontendController@dropzone")->name("dropzone");
     Route::post("dropzone", "Frontend\BackendController@dropzone")->name("backend.dropzone");
+
+    Route::group(['prefix' => "autcomplete"], function() {
+        Route::get("/pure", "FrontendController@autocompletePure")->name("frontend.autocomplete.pure");
+    });
+
+    Route::group(["prefix" => "api"], function() {
+        Route::get("products", "API\FrontendController@products");
+    });
 });

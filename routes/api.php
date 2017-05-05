@@ -25,6 +25,10 @@ $api->version('v1', function ($api) {
         $api->get('test', 'App\Http\Controllers\API\ApiBaseController@test');
         $api->get('err', 'App\Http\Controllers\API\ApiBaseController@err');
     });
+
+    $api->group(["prefix" => "f"], function($api) {
+        $api->get("products", "App\Http\Controllers\API\FrontendController@products");
+    });
     $api->resource("authenticate", "App\Http\Controllers\API\AuthenticateController", ["only" => ["index"]]);
     $api->post("authenticate", "App\Http\Controllers\API\AuthenticateController@authenticate");
 });

@@ -16,4 +16,14 @@ class FrontendController extends Controller
     public function dropzone() {
       return view("frontend.dropzone.index");
     }
+
+    /**
+     * ========================================================
+     * AUTOCOMPLETE
+     * ========================================================
+     */
+    
+    public function autocompletePure() {
+        return view("frontend.autocomplete.pure");
+    }
 }
