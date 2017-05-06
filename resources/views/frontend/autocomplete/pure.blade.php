@@ -135,5 +135,5 @@
 @endsection
 
 @section("scripts")
-  <script src="{{asset("frontend/autocomplete/pure.js")}}"></script>
+  <script src="{{asset("front/autocomplete/pure.js")}}"></script>
 @endsection
