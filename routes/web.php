@@ -90,4 +90,6 @@ Route::group(["prefix"=>"frontend"], function () {
     Route::group(["prefix" => "api"], function() {
         Route::get("products", "API\FrontendController@products");
     });
+
+    Route::get("{categorie}/{slug}", "FrontendController@showPen");
 });

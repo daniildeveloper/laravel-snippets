@@ -22,6 +22,10 @@ Frontend
         <li>
           <a href="{{route("frontend.autocomplete.pure")}}">pure jquery</a>
         </li>
+        <li>
+          <a href="{{url("frontend/autocomplete/jqueryui")}}">jqueryui</a>
+        </li>
+        <li><a href="{{url("frontend/autocomplete/combobox")}}">Combobox</a></li>
       </ul>
     </div>
 

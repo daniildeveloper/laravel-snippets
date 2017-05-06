@@ -11,6 +11,7 @@
     "bootstrap": "^3.3.7"
   },
   "dependencies": {
-    "dropzone": "^4.3.0"
+    "dropzone": "^4.3.0",
+    "jquery-ui": "jqueryui#^1.12.1"
   }
 }
