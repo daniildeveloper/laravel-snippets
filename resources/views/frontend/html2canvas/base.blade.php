@@ -10,6 +10,7 @@ Html to canvas base php
   <ol class="breadcrumb">
     <li><a href="{{route("front")}}">Frontend</a></li>
     <li>Html to canvas base php</li>
+    <li><a href="{{url("frontend/html2canvas/doc")}}">docs</a></li>
   </ol>
 
   <div class="wrap">
