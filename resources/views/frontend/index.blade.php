@@ -29,6 +29,13 @@ Frontend
       </ul>
     </div>
 
+    <div class="col-md-3">
+      <h4>Html2canvas</h4>
+      <ul>
+        <li><a href="{{url("frontend/html2canvas/base")}}">html2canvas</a></li>
+      </ul>
+    </div>
+
   </div>
 </div>
 @endsection

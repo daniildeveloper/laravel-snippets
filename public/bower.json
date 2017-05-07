@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "dropzone": "^4.3.0",
-    "jquery-ui": "jqueryui#^1.12.1"
+    "jquery-ui": "jqueryui#^1.12.1",
+    "html2canvas": "^0.4.1"
   }
 }
