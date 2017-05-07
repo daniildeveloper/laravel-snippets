@@ -95,5 +95,6 @@ Route::group(["prefix"=>"frontend"], function () {
 });
 
 Route::group(["prefix" => "code"], function() {
-    Route::get("/{cateforie}/{slug}", "Code\BaseController@showView");
+    Route::get("/", function(){})->name("code");
+    Route::get("/{categorie}/{slug}", "Code\BaseController@showView");
 });
