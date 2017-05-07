@@ -6,3 +6,5 @@ public/vendors/
 Homestead.json
 Homestead.yaml
 
+/public/wordpress/*
+!/public/wordpress/wp-content/
