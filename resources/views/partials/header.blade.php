@@ -28,6 +28,8 @@
                 <li>
                     <a href="{{route("front")}}">Frontend</a>
                 </li>
+
+                <li><a href="{{route("code")}}">Code Snippets</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if(Auth::user() !== null)

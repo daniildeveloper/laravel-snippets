@@ -93,3 +93,7 @@ Route::group(["prefix"=>"frontend"], function () {
 
     Route::get("{categorie}/{slug}", "FrontendController@showPen");
 });
+
+Route::group(["prefix" => "code"], function() {
+    Route::get("/{cateforie}/{slug}", "Code\BaseController@showView");
+});
