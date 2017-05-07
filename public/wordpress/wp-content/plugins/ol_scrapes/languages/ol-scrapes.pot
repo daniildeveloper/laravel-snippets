@@ -1,0 +1,1080 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Scrapes\n"
+"POT-Creation-Date: 2017-02-13 03:41+0200\n"
+"PO-Revision-Date: 2017-02-12 00:04+0200\n"
+"Last-Translator: \n"
+"Language-Team: Octolooks <octolooks@gmail.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: classes/class-ol-scrapes.php:208 views/scrape-meta-box.php:906
+msgid "Featured image"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:209 classes/class-ol-scrapes.php:2487
+#: views/scrape-meta-box.php:325 views/scrape-meta-box.php:392
+#: views/scrape-meta-box.php:948
+msgid "Name"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:210 views/scrape-meta-box.php:393
+#: views/scrape-meta-box.php:949
+msgid "e.g. name"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:211 views/scrape-meta-box.php:400
+msgid "e.g. value"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:212 views/scrape-meta-box.php:399
+#: views/scrape-meta-box.php:436 views/scrape-meta-box.php:453
+#: views/scrape-meta-box.php:513 views/scrape-meta-box.php:596
+#: views/scrape-meta-box.php:671 views/scrape-meta-box.php:760
+#: views/scrape-meta-box.php:834 views/scrape-meta-box.php:852
+#: views/scrape-meta-box.php:912 views/scrape-meta-box.php:923
+#: views/scrape-meta-box.php:955 views/scrape-meta-box.php:1084
+#: views/scrape-meta-box.php:1132
+msgid "Value"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:213 views/scrape-meta-box.php:437
+#: views/scrape-meta-box.php:454 views/scrape-meta-box.php:514
+#: views/scrape-meta-box.php:597 views/scrape-meta-box.php:672
+#: views/scrape-meta-box.php:761 views/scrape-meta-box.php:835
+#: views/scrape-meta-box.php:913 views/scrape-meta-box.php:956
+#: views/scrape-meta-box.php:1085
+msgid "e.g. //div[@id='octolooks']"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:214 views/scrape-meta-box.php:330
+#: views/scrape-meta-box.php:424 views/scrape-meta-box.php:440
+#: views/scrape-meta-box.php:458 views/scrape-meta-box.php:517
+#: views/scrape-meta-box.php:600 views/scrape-meta-box.php:675
+#: views/scrape-meta-box.php:764 views/scrape-meta-box.php:838
+#: views/scrape-meta-box.php:845 views/scrape-meta-box.php:855
+#: views/scrape-meta-box.php:916 views/scrape-meta-box.php:927
+#: views/scrape-meta-box.php:959 views/scrape-meta-box.php:1088
+#: views/scrape-meta-box.php:1135 views/scrape-meta-box.php:1156
+#: views/scrape-meta-box.php:1180 views/scrape-meta-box.php:1209
+#: views/scrape-meta-box.php:1253 views/scrape-meta-box.php:1274
+#: views/scrape-meta-box.php:1345 views/scrape-meta-box.php:1360
+#: views/scrape-settings.php:45 views/scrape-settings.php:52
+msgid "Please enter a valid value."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:215 views/scrape-meta-box.php:963
+msgid "Attribute"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:216 views/scrape-meta-box.php:964
+msgid "e.g. href"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:217 views/scrape-meta-box.php:606
+#: views/scrape-meta-box.php:770
+msgid "e.g. [scrape_value]"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:218 views/scrape-meta-box.php:605
+#: views/scrape-meta-box.php:769 views/scrape-meta-box.php:969
+msgid "Template"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:219 views/scrape-meta-box.php:609
+#: views/scrape-meta-box.php:773 views/scrape-meta-box.php:973
+msgid "value"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:220 views/scrape-meta-box.php:974
+msgid "calculate"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:221 views/scrape-meta-box.php:610
+#: views/scrape-meta-box.php:687 views/scrape-meta-box.php:774
+#: views/scrape-meta-box.php:975
+msgid "date"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:222 views/scrape-meta-box.php:612
+#: views/scrape-meta-box.php:692 views/scrape-meta-box.php:776
+#: views/scrape-meta-box.php:976
+msgid "source url"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:223 views/scrape-meta-box.php:977
+msgid "product url"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:224 views/scrape-meta-box.php:978
+msgid "cart url"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:225 views/scrape-meta-box.php:553
+#: views/scrape-meta-box.php:644 views/scrape-meta-box.php:726
+#: views/scrape-meta-box.php:808 views/scrape-meta-box.php:886
+#: views/scrape-meta-box.php:1013 views/scrape-meta-box.php:1119
+msgid "Add new find and replace rule"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:226 views/scrape-meta-box.php:650
+#: views/scrape-meta-box.php:732 views/scrape-meta-box.php:814
+#: views/scrape-meta-box.php:1019
+msgid "Enable template"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:227 views/scrape-meta-box.php:559
+#: views/scrape-meta-box.php:651 views/scrape-meta-box.php:733
+#: views/scrape-meta-box.php:815 views/scrape-meta-box.php:892
+#: views/scrape-meta-box.php:1020 views/scrape-meta-box.php:1125
+msgid "Enable find and replace rules"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:228 views/scrape-meta-box.php:537
+#: views/scrape-meta-box.php:627 views/scrape-meta-box.php:709
+#: views/scrape-meta-box.php:792 views/scrape-meta-box.php:870
+#: views/scrape-meta-box.php:996 views/scrape-meta-box.php:1103
+msgid "Find"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:229 views/scrape-meta-box.php:544
+#: views/scrape-meta-box.php:635 views/scrape-meta-box.php:717
+#: views/scrape-meta-box.php:799 views/scrape-meta-box.php:877
+#: views/scrape-meta-box.php:1004 views/scrape-meta-box.php:1110
+msgid "Replace"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:230 views/scrape-meta-box.php:538
+#: views/scrape-meta-box.php:628 views/scrape-meta-box.php:710
+#: views/scrape-meta-box.php:793 views/scrape-meta-box.php:871
+#: views/scrape-meta-box.php:997 views/scrape-meta-box.php:1104
+msgid "e.g. find"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:231 views/scrape-meta-box.php:545
+#: views/scrape-meta-box.php:636 views/scrape-meta-box.php:718
+#: views/scrape-meta-box.php:800 views/scrape-meta-box.php:878
+#: views/scrape-meta-box.php:1005 views/scrape-meta-box.php:1111
+msgid "e.g. replace"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:232 views/scrape-meta-box.php:496
+msgid "Please select a taxonomy"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:233
+msgid "Source URL is not valid."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:234
+msgid "Post item is not valid."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:235
+msgid "Selected item is not a link"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:236
+msgid "Selected item is not an image"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:267 views/scrape-meta-box.php:317
+msgid "Add New"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:268
+msgid "All Scrapes"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:289
+msgid "Scrapes Settings"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:289 views/scrape-settings.php:22
+msgid "Settings"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:512 classes/class-ol-scrapes.php:2508
+msgid "Deactivated"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:515 classes/class-ol-scrapes.php:2511
+msgid "Preparing"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:518 classes/class-ol-scrapes.php:2514
+msgid "Waiting next run"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:521 classes/class-ol-scrapes.php:2517
+msgid "Running"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:524 classes/class-ol-scrapes.php:2520
+msgid "Complete"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:528 classes/class-ol-scrapes.php:529
+#: classes/class-ol-scrapes.php:2535 classes/class-ol-scrapes.php:2536
+msgid "None"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:537 classes/class-ol-scrapes.php:2545
+msgid "No Schedule"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:729
+msgid "5 Minutes"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:733
+msgid "10 Minutes"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:737
+msgid "15 Minutes"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:741
+msgid "30 Minutes"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:745
+msgid "45 Minutes"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:749
+msgid "1 Hour"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:753
+msgid "2 Hours"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:757
+msgid "4 Hours"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:761
+msgid "6 Hours"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:765
+msgid "8 Hours"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:769
+msgid "12 Hours"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:773
+msgid "1 Day"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:777
+msgid "1 Week"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:781
+msgid "2 Weeks"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:785
+msgid "1 Month"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2014
+msgid ""
+"Your system does not allow php exec function. Your cron type is saved as "
+"WordPress cron type."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2041
+msgid ""
+"System error occurred during crontab installation. Your cron type is saved "
+"as WordPress cron type."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2046
+msgid ""
+"System error occurred while getting your cron jobs. Your cron type is saved "
+"as WordPress cron type."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2082
+msgid "PHP set_time_limit function is not working."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2085
+#, php-format
+msgid "Your scrapes can only works for %s seconds"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2089
+msgid ""
+"DISABLE_WP_CRON is probably set true in wp-config.php.<br/>Please delete or "
+"set it to false, or make sure that you ping wp-cron.php automatically."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2339
+msgid "Your WordPress version is below 3.5. Please update."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2343
+msgid "PHP version is below 5.2.4. Please update."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2348
+#, php-format
+msgid ""
+"PHP extension %s is not loaded. Please contact your server administrator or "
+"visit http://php.net/manual/en/%s.installation.php for installation."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2355
+#, php-format
+msgid ""
+"%s folder is not writable. Please update permissions for this folder to "
+"chmod 755."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2359
+#, php-format
+msgid ""
+"%s folder is not writable therefore logs.txt file could not be created. "
+"Please update permissions for this folder to chmod 755."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2381
+msgid "View All Scrapes"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2488 views/scrape-meta-box.php:1063
+msgid "Status"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2489
+msgid "Schedules"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2490
+msgid "Actions"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2548
+msgid "Last Run:"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2549
+msgid "Last Complete:"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2550
+msgid "Next Run:"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2551
+msgid "Total Run:"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2557 views/scrape-meta-box.php:320
+#: views/scrape-meta-box.php:1401
+msgid "Edit"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2558
+msgid "Run"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2559
+msgid "Pause"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2560
+msgid "Copy"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2561
+msgid "Trash"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:2562
+msgid "Restore"
+msgstr ""
+
+#: classes/class-ol-scrapes.php:3070
+msgid ""
+"An error occurred while connecting to server. Please check your connection "
+"or try again later."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:3071
+msgid ""
+"Purchase code is defined for another domain name before. Please provide "
+"another purchase code."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:3072 views/scrape-settings.php:39
+msgid "Purchase code is validated."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:3073
+msgid "Purchase code is removed from settings."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:3074
+msgid ""
+"Purchase code is not approved by Envato. Please check your purchase code."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:3075
+msgid ""
+"An error occurred while decoding Envato API results. Please try again later."
+msgstr ""
+
+#: classes/class-ol-scrapes.php:3076
+msgid "Purchase code is already exists. Please provide another purchase code."
+msgstr ""
+
+#: views/scrape-meta-box.php:3 views/scrape-settings.php:3
+msgid "Error!"
+msgstr ""
+
+#: views/scrape-meta-box.php:4 views/scrape-settings.php:4
+msgid "This page requires JavaScript to run properly."
+msgstr ""
+
+#: views/scrape-meta-box.php:318
+msgid "Give a name and select task type to start."
+msgstr ""
+
+#: views/scrape-meta-box.php:321 views/scrape-settings.php:23
+msgid "Modify options and save changes."
+msgstr ""
+
+#: views/scrape-meta-box.php:325
+msgid "The field used to give a name and define task (Required)."
+msgstr ""
+
+#: views/scrape-meta-box.php:329
+msgid "e.g. Scrapes"
+msgstr ""
+
+#: views/scrape-meta-box.php:337
+msgid "Task type"
+msgstr ""
+
+#: views/scrape-meta-box.php:337
+msgid "The field used to set running type of the task (Required)."
+msgstr ""
+
+#: views/scrape-meta-box.php:345
+msgid "Single"
+msgstr ""
+
+#: views/scrape-meta-box.php:352
+msgid "Serial"
+msgstr ""
+
+#: views/scrape-meta-box.php:359
+msgid "Feed"
+msgstr ""
+
+#: views/scrape-meta-box.php:372
+msgid "Link Options"
+msgstr ""
+
+#: views/scrape-meta-box.php:378
+msgid "Cookies"
+msgstr ""
+
+#: views/scrape-meta-box.php:378
+msgid ""
+"The field used to set which cookie values to be sent to source url requests."
+msgstr ""
+
+#: views/scrape-meta-box.php:408
+msgid "Add new cookie"
+msgstr ""
+
+#: views/scrape-meta-box.php:415
+msgid "Source URL"
+msgstr ""
+
+#: views/scrape-meta-box.php:415
+msgid "The field used to set which source you want to scrape (Required)."
+msgstr ""
+
+#: views/scrape-meta-box.php:420
+msgid "URL"
+msgstr ""
+
+#: views/scrape-meta-box.php:421 views/scrape-settings.php:50
+msgid "e.g. http://octolooks.com"
+msgstr ""
+
+#: views/scrape-meta-box.php:431
+msgid "Post item"
+msgstr ""
+
+#: views/scrape-meta-box.php:431
+msgid "The field used to set which links redirect to detail pages (Required)."
+msgstr ""
+
+#: views/scrape-meta-box.php:447
+msgid "Next page"
+msgstr ""
+
+#: views/scrape-meta-box.php:447
+msgid "The field used to set which link redirects to next list page."
+msgstr ""
+
+#: views/scrape-meta-box.php:451
+msgid "Next page is found automatically."
+msgstr ""
+
+#: views/scrape-meta-box.php:469
+msgid "Category Options"
+msgstr ""
+
+#: views/scrape-meta-box.php:475
+msgid "Post type"
+msgstr ""
+
+#: views/scrape-meta-box.php:475
+msgid ""
+"The field used to set the post type for posts which will be created "
+"automatically by the plugin in your WordPress site."
+msgstr ""
+
+#: views/scrape-meta-box.php:484 views/scrape-meta-box.php:1056
+#: views/scrape-meta-box.php:1071 views/scrape-meta-box.php:1194
+#: views/scrape-meta-box.php:1238 views/scrape-meta-box.php:1308
+#: views/scrape-meta-box.php:1373
+msgid "Please select a valid value."
+msgstr ""
+
+#: views/scrape-meta-box.php:491
+msgid "Create categories"
+msgstr ""
+
+#: views/scrape-meta-box.php:491
+msgid ""
+"The field used to set the categories of automatically created posts to which "
+"newly created categories by the plugin in your WordPress site."
+msgstr ""
+
+#: views/scrape-meta-box.php:521 views/scrape-meta-box.php:842
+msgid "Separator"
+msgstr ""
+
+#: views/scrape-meta-box.php:522 views/scrape-meta-box.php:843
+msgid "e.g. ,"
+msgstr ""
+
+#: views/scrape-meta-box.php:566
+msgid "Categories"
+msgstr ""
+
+#: views/scrape-meta-box.php:566
+msgid ""
+"The field used to set the categories of posts which will be created "
+"automatically by the plugin in your WordPress site."
+msgstr ""
+
+#: views/scrape-meta-box.php:585
+msgid "Post Options"
+msgstr ""
+
+#: views/scrape-meta-box.php:591
+msgid "Title"
+msgstr ""
+
+#: views/scrape-meta-box.php:591
+msgid ""
+"The field used to set post titles which will be created automatically by the "
+"plugin in your WordPress site."
+msgstr ""
+
+#: views/scrape-meta-box.php:611 views/scrape-meta-box.php:691
+#: views/scrape-meta-box.php:775
+msgid "custom field"
+msgstr ""
+
+#: views/scrape-meta-box.php:657 views/scrape-meta-box.php:739
+#: views/scrape-meta-box.php:933 views/scrape-meta-box.php:1142
+msgid "Detect from feed"
+msgstr ""
+
+#: views/scrape-meta-box.php:658 views/scrape-meta-box.php:741
+#: views/scrape-meta-box.php:822 views/scrape-meta-box.php:898
+#: views/scrape-meta-box.php:934 views/scrape-meta-box.php:1143
+msgid "Select from source"
+msgstr ""
+
+#: views/scrape-meta-box.php:665
+msgid "Content"
+msgstr ""
+
+#: views/scrape-meta-box.php:665
+msgid ""
+"The field used to set post content which will be created automatically by "
+"the plugin in your WordPress site."
+msgstr ""
+
+#: views/scrape-meta-box.php:669
+msgid "Content is found automatically."
+msgstr ""
+
+#: views/scrape-meta-box.php:683
+msgid "content"
+msgstr ""
+
+#: views/scrape-meta-box.php:684
+msgid "title"
+msgstr ""
+
+#: views/scrape-meta-box.php:685
+msgid "categories"
+msgstr ""
+
+#: views/scrape-meta-box.php:686
+msgid "tags"
+msgstr ""
+
+#: views/scrape-meta-box.php:688
+msgid "featured image"
+msgstr ""
+
+#: views/scrape-meta-box.php:689
+msgid "gallery"
+msgstr ""
+
+#: views/scrape-meta-box.php:690
+msgid "embed"
+msgstr ""
+
+#: views/scrape-meta-box.php:740
+msgid "Detect automatically"
+msgstr ""
+
+#: views/scrape-meta-box.php:747
+msgid "Allow HTML tags"
+msgstr ""
+
+#: views/scrape-meta-box.php:748
+msgid "Download images to media library"
+msgstr ""
+
+#: views/scrape-meta-box.php:755
+msgid "Excerpt"
+msgstr ""
+
+#: views/scrape-meta-box.php:755
+msgid ""
+"The field used to set post excerpt which will be created automatically by "
+"the plugin in your WordPress site."
+msgstr ""
+
+#: views/scrape-meta-box.php:821
+msgid "Generate from content"
+msgstr ""
+
+#: views/scrape-meta-box.php:829
+msgid "Tags"
+msgstr ""
+
+#: views/scrape-meta-box.php:829
+msgid ""
+"The field used to set the tags of posts which will be created automatically "
+"by the plugin in your WordPress site."
+msgstr ""
+
+#: views/scrape-meta-box.php:853
+msgid "e.g. octolooks, scrapes"
+msgstr ""
+
+#: views/scrape-meta-box.php:899 views/scrape-meta-box.php:1144
+msgid "Enter custom"
+msgstr ""
+
+#: views/scrape-meta-box.php:906
+msgid ""
+"The field used to set featured image for posts which will be created "
+"automatically by the plugin in your WordPress site."
+msgstr ""
+
+#: views/scrape-meta-box.php:910
+msgid "Featured image is found automatically."
+msgstr ""
+
+#: views/scrape-meta-box.php:924 views/scrape-meta-box.php:1206
+#: views/scrape-meta-box.php:1250 views/scrape-meta-box.php:1271
+#: views/scrape-meta-box.php:1342 views/scrape-meta-box.php:1357
+msgid "e.g. 100"
+msgstr ""
+
+#: views/scrape-meta-box.php:935
+msgid "Select from media library"
+msgstr ""
+
+#: views/scrape-meta-box.php:942
+msgid "Custom fields"
+msgstr ""
+
+#: views/scrape-meta-box.php:942
+msgid ""
+"The field used to set the custom meta fields of posts which will be created "
+"automatically by the plugin in your WordPress site."
+msgstr ""
+
+#: views/scrape-meta-box.php:970
+msgid "e.g [scrape_value]"
+msgstr ""
+
+#: views/scrape-meta-box.php:1030
+msgid "Add new custom field"
+msgstr ""
+
+#: views/scrape-meta-box.php:1041
+msgid "Publish Options"
+msgstr ""
+
+#: views/scrape-meta-box.php:1047
+msgid "Author"
+msgstr ""
+
+#: views/scrape-meta-box.php:1047
+msgid ""
+"The field used to set the publishing author for automatically created posts "
+"by the plugin in your WordPress site."
+msgstr ""
+
+#: views/scrape-meta-box.php:1063
+msgid ""
+"The field used to set which post status for automatically created posts by "
+"the plugin in your WordPress site."
+msgstr ""
+
+#: views/scrape-meta-box.php:1067
+msgid "Published"
+msgstr ""
+
+#: views/scrape-meta-box.php:1068
+msgid "Draft"
+msgstr ""
+
+#: views/scrape-meta-box.php:1069
+msgid "Pending review"
+msgstr ""
+
+#: views/scrape-meta-box.php:1070
+msgid "Private"
+msgstr ""
+
+#: views/scrape-meta-box.php:1078
+msgid "Date"
+msgstr ""
+
+#: views/scrape-meta-box.php:1078
+msgid ""
+"The field used to set the publish date of posts which will be created "
+"automatically by the plugin in your WordPress site."
+msgstr ""
+
+#: views/scrape-meta-box.php:1082
+msgid "Date is found automatically."
+msgstr ""
+
+#: views/scrape-meta-box.php:1133
+msgid "e.g. YYYY-MM-DD HH:mm:ss"
+msgstr ""
+
+#: views/scrape-meta-box.php:1141
+msgid "Process time"
+msgstr ""
+
+#: views/scrape-meta-box.php:1151
+msgid "Discussion"
+msgstr ""
+
+#: views/scrape-meta-box.php:1151
+msgid ""
+"The field used to set whether user comments are allowed for automatically "
+"created posts by the plugin in your WordPress site or not."
+msgstr ""
+
+#: views/scrape-meta-box.php:1155
+msgid "Allow comments"
+msgstr ""
+
+#: views/scrape-meta-box.php:1167
+msgid "Uniqueness Options"
+msgstr ""
+
+#: views/scrape-meta-box.php:1173
+msgid "Unique post check"
+msgstr ""
+
+#: views/scrape-meta-box.php:1173
+msgid "The field to use whether posts should be unique or not."
+msgstr ""
+
+#: views/scrape-meta-box.php:1177
+msgid "From title"
+msgstr ""
+
+#: views/scrape-meta-box.php:1178
+msgid "From content"
+msgstr ""
+
+#: views/scrape-meta-box.php:1179
+msgid "From source url"
+msgstr ""
+
+#: views/scrape-meta-box.php:1187
+msgid "On existing post"
+msgstr ""
+
+#: views/scrape-meta-box.php:1187
+msgid ""
+"The field to set the action when a post in source url already exists in the "
+"WordPress site."
+msgstr ""
+
+#: views/scrape-meta-box.php:1191 views/scrape-meta-box.php:1371
+msgid "Skip to next process"
+msgstr ""
+
+#: views/scrape-meta-box.php:1192
+msgid "Complete process"
+msgstr ""
+
+#: views/scrape-meta-box.php:1193
+msgid "Update post"
+msgstr ""
+
+#: views/scrape-meta-box.php:1201
+msgid "Complete run on loop"
+msgstr ""
+
+#: views/scrape-meta-box.php:1201
+msgid ""
+"The field to set how many on existing post occurrence is needed to stop the "
+"task until next run time in order to save system resources (Required)."
+msgstr ""
+
+#: views/scrape-meta-box.php:1207 views/scrape-meta-box.php:1251
+msgid "posts"
+msgstr ""
+
+#: views/scrape-meta-box.php:1215
+msgid "Enable"
+msgstr ""
+
+#: views/scrape-meta-box.php:1226
+msgid "Schedule Options"
+msgstr ""
+
+#: views/scrape-meta-box.php:1232
+msgid "Cron type"
+msgstr ""
+
+#: views/scrape-meta-box.php:1232
+msgid ""
+"The field used to set the method of calling the task when it is due time in "
+"the plugin in your WordPress site."
+msgstr ""
+
+#: views/scrape-meta-box.php:1236
+msgid "System"
+msgstr ""
+
+#: views/scrape-meta-box.php:1237
+msgid "WordPress"
+msgstr ""
+
+#: views/scrape-meta-box.php:1245
+msgid "Total posts"
+msgstr ""
+
+#: views/scrape-meta-box.php:1245
+msgid ""
+"The field used to set how many posts will be created in the task in each run "
+"(Required)."
+msgstr ""
+
+#: views/scrape-meta-box.php:1259 views/scrape-meta-box.php:1280
+msgid "Unlimited"
+msgstr ""
+
+#: views/scrape-meta-box.php:1266
+msgid "Total runs"
+msgstr ""
+
+#: views/scrape-meta-box.php:1266
+msgid ""
+"The field to set how many times the task will run. When the task reaches the "
+"total run value it stops running (Required)."
+msgstr ""
+
+#: views/scrape-meta-box.php:1272
+msgid "times"
+msgstr ""
+
+#: views/scrape-meta-box.php:1287
+msgid "Run frequency"
+msgstr ""
+
+#: views/scrape-meta-box.php:1287
+msgid "The field to set the time interval of each task run."
+msgstr ""
+
+#: views/scrape-meta-box.php:1302
+msgid "On uncompleted run"
+msgstr ""
+
+#: views/scrape-meta-box.php:1302
+msgid ""
+"The field to use what action will be taken when a process is not finished "
+"and according to run frequency field another task should start."
+msgstr ""
+
+#: views/scrape-meta-box.php:1306
+msgid "Terminate previous run"
+msgstr ""
+
+#: views/scrape-meta-box.php:1307
+msgid "Wait until previous run is completed"
+msgstr ""
+
+#: views/scrape-meta-box.php:1315
+msgid "Run type"
+msgstr ""
+
+#: views/scrape-meta-box.php:1315
+msgid "The field to set where the task should start from for every run."
+msgstr ""
+
+#: views/scrape-meta-box.php:1319
+msgid "Start from first list page"
+msgstr ""
+
+#: views/scrape-meta-box.php:1320
+msgid "Continue from last scraped list page"
+msgstr ""
+
+#: views/scrape-meta-box.php:1331
+msgid "Other Options"
+msgstr ""
+
+#: views/scrape-meta-box.php:1337
+msgid "Timeout for process"
+msgstr ""
+
+#: views/scrape-meta-box.php:1337
+msgid ""
+"The field to set maximum time the task will wait for a reply for http "
+"requests (Required)."
+msgstr ""
+
+#: views/scrape-meta-box.php:1343 views/scrape-meta-box.php:1358
+msgid "seconds"
+msgstr ""
+
+#: views/scrape-meta-box.php:1352
+msgid "Wait next processes"
+msgstr ""
+
+#: views/scrape-meta-box.php:1352
+msgid "The field to set how much time to wait between processes (Required)."
+msgstr ""
+
+#: views/scrape-meta-box.php:1367
+msgid "On error"
+msgstr ""
+
+#: views/scrape-meta-box.php:1367
+msgid ""
+"The field to set what action will be taken if task encounters an error "
+"during scrape process."
+msgstr ""
+
+#: views/scrape-meta-box.php:1372
+msgid "Complete run"
+msgstr ""
+
+#: views/scrape-meta-box.php:1388
+msgid "Need Help?"
+msgstr ""
+
+#: views/scrape-meta-box.php:1389
+msgid "Please make sure that you have followed these steps in order."
+msgstr ""
+
+#: views/scrape-meta-box.php:1391
+msgid "Watch tutorials"
+msgstr ""
+
+#: views/scrape-meta-box.php:1392
+msgid "Read F.A.Q"
+msgstr ""
+
+#: views/scrape-meta-box.php:1393
+msgid "Contact Octolooks"
+msgstr ""
+
+#: views/scrape-meta-box.php:1399
+msgid "Create"
+msgstr ""
+
+#: views/scrape-meta-box.php:1438
+msgid "Disable styles"
+msgstr ""
+
+#: views/scrape-settings.php:29
+msgid "License Options"
+msgstr ""
+
+#: views/scrape-settings.php:35
+msgid "Purchase Code"
+msgstr ""
+
+#: views/scrape-settings.php:35
+msgid ""
+"The fields to set 36 character long purchase code and domain name without "
+"subdomain, starting with http which the plugin is defined to run on."
+msgstr ""
+
+#: views/scrape-settings.php:41
+msgid "Code"
+msgstr ""
+
+#: views/scrape-settings.php:49
+msgid "Domain"
+msgstr ""
+
+#: views/scrape-settings.php:58
+msgid ""
+"I confirm that my purchase code will be defined for a single domain name at "
+"first validation according to <a href=\"https://codecanyon.net/licenses/"
+"terms/regular\" target=\"_blank\">regular license</a> terms. It will be "
+"valid only for domain name that I entered including subdomain names and "
+"localhost for testing purposes."
+msgstr ""
+
+#: views/scrape-settings.php:59
+msgid "Must be confirmed in order to continue."
+msgstr ""
+
+#: views/scrape-settings.php:77
+msgid "Save"
+msgstr ""
