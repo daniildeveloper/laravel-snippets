@@ -20,3 +20,4 @@ Wordpress Active Plugins: []
 2017-05-07 20:35:46 TASK ID: 0 - PID: 1732 - RAM: 6.72MB - post data for scrape task
 2017-05-07 20:35:46 TASK ID: 0 - PID: 1732 - RAM: 6.72MB - []
 2017-05-07 20:35:46 TASK ID: 0 - PID: 1732 - RAM: 6.8MB - Helper: offline invalid.
+2017-05-07 20:42:26 TASK ID: 0 - PID: 1732 - RAM: 7.05MB - doing autosave scrape returns
