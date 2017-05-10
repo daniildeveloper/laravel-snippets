@@ -8,3 +8,7 @@ Homestead.yaml
 
 /public/wordpress/*
 !/public/wordpress/wp-content/
+
+#submodules
+/public/another/mautic/vendor
+/public/another/shopware/vendor
