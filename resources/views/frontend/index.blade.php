@@ -40,7 +40,7 @@ Frontend
       <h4>Images upload</h4>
       <ul>
         <li><a href="{{url("frontend/upload/bastian")}}">Pen by bastian Andre</a></li>
-        <li><a href=""></a></li>
+        <li><a href="{{url("frontend/upload/fineuploader")}}">Fine Uploader</a></li>
         <li><a href=""></a></li>
         <li><a href=""></a></li>
         <li><a href=""></a></li>
