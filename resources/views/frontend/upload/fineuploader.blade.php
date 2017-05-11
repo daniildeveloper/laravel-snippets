@@ -33,10 +33,10 @@ Fine Uploader
                 <span class="qq-upload-drop-area-text-selector"></span>
             </div>
             <div class="qq-upload-button-selector qq-upload-button">
-                <div>Upload a file</div>
+                <div>Загрузить изображения</div>
             </div>
             <span class="qq-drop-processing-selector qq-drop-processing">
-                <span>Processing dropped files...</span>
+                <span>Удаляем файлы ...</span>
                 <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
             </span>
             <ul class="qq-upload-list-selector qq-upload-list" role="region" aria-live="polite" aria-relevant="additions removals">
@@ -52,8 +52,10 @@ Fine Uploader
                     <button type="button" class="qq-upload-cancel-selector qq-upload-cancel">X</button>
                     <button type="button" class="qq-upload-retry-selector qq-upload-retry">
                         <span class="qq-btn qq-retry-icon" aria-label="Retry"></span>
-                        Retry
+                        Повтор
                     </button>
+                    <span class="qq-edit-filename-icon-selector qq-edit-filename-icon" aria-label="Edit filename"></span>
+<input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
 
                     <div class="qq-file-info">
                         <div class="qq-file-name">
@@ -85,8 +87,8 @@ Fine Uploader
             <dialog class="qq-confirm-dialog-selector">
                 <div class="qq-dialog-message-selector"></div>
                 <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">No</button>
-                    <button type="button" class="qq-ok-button-selector">Yes</button>
+                    <button type="button" class="qq-cancel-button-selector">Нет</button>
+                    <button type="button" class="qq-ok-button-selector">Да</button>
                 </div>
             </dialog>
 
@@ -94,7 +96,7 @@ Fine Uploader
                 <div class="qq-dialog-message-selector"></div>
                 <input type="text">
                 <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">Cancel</button>
+                    <button type="button" class="qq-cancel-button-selector">Отмена</button>
                     <button type="button" class="qq-ok-button-selector">Ok</button>
                 </div>
             </dialog>
