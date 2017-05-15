@@ -13,8 +13,11 @@ class NomadSeeder extends Seeder
     public function run()
     {
         $post = new Post;
-        $posts = Post::all();
-
-        dd($posts);
+        $post->post_title = "Corcel";
+        // $post->post_slug = "corcel";
+        $post->post_content = "Some content";
+        $post->post_type = "product";
+        // $post->author_id = 1;
+        $post->save();
     }
 }
