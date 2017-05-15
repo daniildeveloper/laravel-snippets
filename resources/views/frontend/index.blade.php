@@ -50,7 +50,13 @@ Frontend
   </div>
 
   <div class="row">
-    
+    <div class="col-md-3">
+      <h4>Maps</h4>
+      <ul>
+        <li><a href="{{url("frontend/map/yaplacepicker")}}">Yandex Maps Place Picker</a></li>
+      </ul>
+    </div>
   </div>
+  
 </div>
 @endsection
