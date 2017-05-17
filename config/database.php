@@ -46,13 +46,13 @@ return [
 
     'connections' => [
 
-        'sqlite'    => [
+        'sqlite'           => [
             'driver'   => 'sqlite',
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix'   => '',
         ],
 
-        'mysql'     => [
+        'mysql'            => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
             'port'      => env('DB_PORT', '3306'),
@@ -66,7 +66,7 @@ return [
             'engine'    => null,
         ],
 
-        'pgsql'     => [
+        'pgsql'            => [
             'driver'   => 'pgsql',
             'host'     => env('DB_HOST', 'localhost'),
             'port'     => env('DB_PORT', '5432'),
@@ -78,15 +78,28 @@ return [
             'schema'   => 'public',
             'sslmode'  => 'prefer',
         ],
-        "wordpress" => [
+        "wordpress"        => [
             'driver'    => 'mysql',
             'host'      => 'localhost',
-            'database'  => 'woocomerce',
-            'username'  => 'homestead',
-            'password'  => 'secret',
+            'database'  => 'smartsol_nomad',
+            'username'  => 'root',
+            'password'  => '',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => 'wp_',
+            'strict'    => false,
+            'engine'    => null,
+        ],
+        "wordpress_remote" => [
+            'driver'    => 'mysql',
+            'host'      => '195.210.46.27',
+            'database'  => 'smartsol_wordpress_b',
+            // "port"      => "3306",
+            'username'  => 'smart_wordpres_8',
+            'password'  => '0i8rFm9#MV',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '5Ncrzo0_',
             'strict'    => false,
             'engine'    => null,
         ],

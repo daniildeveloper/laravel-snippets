@@ -19,7 +19,8 @@
         "sybio/gif-creator": "^1.0",
         "sybio/gif-frame-extractor": "^1.0",
         "fineuploader/php-traditional-server": "^1.2",
-        "jgrossi/corcel": "^1.4"
+        "jgrossi/corcel": "^1.4",
+        "cocur/slugify": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
