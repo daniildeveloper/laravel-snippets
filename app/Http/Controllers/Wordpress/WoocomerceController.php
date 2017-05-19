@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Wordpress;
 
 use App\Http\Controllers\Controller;
 use Automattic\WooCommerce\Client;
+use GuzzleHttp\Client as Guzzle;
 use Illuminate\Http\Request;
 
 // use WooCommerce;
@@ -13,12 +14,18 @@ use Illuminate\Http\Request;
  */
 class WoocomerceController extends Controller
 {
+    protected $nomadUri = "http://localhost/nomad/wp-json/wp/v2/";
     protected $woocommerce;
 
     protected $nomad;
 
+    protected $base64;
+
+    protected $restApiClient;
+
     public function __construct()
     {
+        $this->base64      = base64_encode("super:super");
         $this->woocommerce = new Client("http://localhost/nomad",
             "ck_5c17b31649c496ad475980cdee2e0b6c0f223330",
             "cs_36c1dc83b4aa012e67dc53cd460bec3e87118bb3"
@@ -28,9 +35,38 @@ class WoocomerceController extends Controller
             "ck_63ab9cbb9f39036142a8fd3123db1b5b45317a34",
             "cs_c66bf6869c67bacad335427cc1946ea623641a72"
         );
+
+        $this->restApiClient = new Guzzle([
+            "base_uri" => $this->nomadUri,
+            "timeout"  => 40.0,
+            // 'headers'  => ['Content-Type' => 'application/json', "Accept" => "application/json", 'Authorization' => "Basic " . $this->base64],
+            "auth"     => [
+                "admin",
+                "admin",
+            ]
+        ]);
     }
 
     public function test()
+    {
+        $params = array(
+            "title"       => "Hello Updated World!",
+            "content_raw" => "Howdy updated content.",
+            "date"        => "2017-02-01T14:00:00+10:00",
+        );
+//print_r(json_encode($params));die;
+        //$response = $client->request('POST');
+        $response = $this->restApiClient->post('posts/',
+            ['body' => json_encode($params)]
+        );
+        echo "<pre>";
+        echo $response->getBody();
+    }
+
+    public function saveRequest(Request $req)
+    {}
+
+    public function woo()
     {
         $title = "Some product";
         $data  = [
@@ -106,7 +142,4 @@ class WoocomerceController extends Controller
         // dd($this->woocommerce->get("products"));
         $this->woocommerce->post("products", $data);
     }
-
-    public function saveRequest(Request $req)
-    {}
 }
