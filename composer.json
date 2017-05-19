@@ -13,14 +13,16 @@
         "dingo/api": "1.0.x@dev",
         "tymon/jwt-auth": "0.5.*",
         "intervention/image": "^2.3",
-        "guzzlehttp/guzzle": "^6.2",
         "league/csv": "^8.2",
         "league/color-extractor": "0.3.*",
         "sybio/gif-creator": "^1.0",
         "sybio/gif-frame-extractor": "^1.0",
         "fineuploader/php-traditional-server": "^1.2",
         "jgrossi/corcel": "^1.4",
-        "cocur/slugify": "^2.5"
+        "cocur/slugify": "^2.5",
+        "guzzlehttp/guzzle": "^6.2",
+        "automattic/woocommerce": "^1.2",
+        "pixelpeter/laravel5-woocommerce-api-client": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

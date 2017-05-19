@@ -1,8 +1,9 @@
 <?php
-use GuzzleHttp\Client as Guzzle;
 use App\Wordpress\MetaPost as Meta;
 use App\Wordpress\Post;
+use GuzzleHttp\Client as Guzzle;
 use Illuminate\Database\Seeder;
+use App\Http\Controllers\Wordpress\WoocomerceController as C;
 
 class NomadSeeder extends Seeder
 {
@@ -23,25 +24,43 @@ class NomadSeeder extends Seeder
         //
         // \Storage::put("some.jpg", );
 
-        // http://i.huffpost.com/gen/1155836/images/o-AWESOME-GIFS-facebook.jpg
-        // $this->parseSvet();
-        // $this->testConnection();
-        // $this->deleteProducts();
-        $this->testGuzzleRes();
+        $c = new C();
+        $r = $c->test();
+        dd($r);
     }
 
     // public function parse
-    // 
-
-    public function testGuzzleRest() {
-        $client = new Guzzle();
-        $res = $client->request("GET", "http://localhost/nomad/wp-json/wp/v2/posts/1");
-        dd($res);
-
+    //
+    //
+    public function testwoocomerceApi() {
 
     }
 
-    public function deleteProducts() {
+    public function testGuzzleRest()
+    {
+        $base64 = "admin:admin";
+        $uri    = "http://localhost/nomad/wp-json/wp/v2/posts/";
+        $client = new Guzzle(
+
+            //ssl false
+        );
+        // $res = $client->request("GET", "$uri/1");
+
+        $post = array(
+            "title"       => "Rest api post",
+            "content_raw" => "Updated content",
+        );
+
+        $res = $client->post($uri, [
+            'headers' => ['Content-Type' => 'application/json', "Accept" => "application/json", 'Authorization' => "Basic " . $base64],
+            "body"    => json_encode($post),
+        ]);
+        dd($res);
+
+    }
+
+    public function deleteProducts()
+    {
         DB::connection("wordpress")->table("posts")->where("post_type", "product")->delete();
     }
 
@@ -76,17 +95,18 @@ class NomadSeeder extends Seeder
             $post->save();
             $lastId = DB::connection("wordpress")->getPdo()->lastInsertId();
             \Log::info("Created post id is $lastId");
-            \Storage::put("2017/parsed/svet/$post->title.jpg", file_get_contents($base_url . $imgSrc)); 
+            \Storage::put("2017/parsed/svet/$post->title.jpg", file_get_contents($base_url . $imgSrc));
 
-            $image = new Meta();
-            $image->meta_key = "_wp_attached_file";
+            $image             = new Meta();
+            $image->meta_key   = "_wp_attached_file";
             $image->meta_value = "2017/parsed/svet/$post->title.jpg";
-            $image->post_id = $lastId;
+            $image->post_id    = $lastId;
             $image->save();
         }
     }
 
-    public function testConnection() {
+    public function testConnection()
+    {
         try {
             DB::connection("wordpress_remote")->getPdo();
         } catch (\Exception $e) {

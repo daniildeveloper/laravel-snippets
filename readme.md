@@ -17,3 +17,7 @@
   - 2 moderator\user with more access
   - 3 admin
   - 777 owner
+
+
+# ignored dependencies
+* mac2000/woo-commerce-api-client

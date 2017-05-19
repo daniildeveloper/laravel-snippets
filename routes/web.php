@@ -98,3 +98,5 @@ Route::group(["prefix" => "code"], function() {
     Route::get("/", function(){})->name("code");
     Route::get("/{categorie}/{slug}", "Code\BaseController@showView");
 });
+
+Route::get("woo", "Wordpress\WoocomerceController@test");
