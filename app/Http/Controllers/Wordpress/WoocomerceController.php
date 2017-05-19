@@ -39,11 +39,11 @@ class WoocomerceController extends Controller
         $this->restApiClient = new Guzzle([
             "base_uri" => $this->nomadUri,
             "timeout"  => 40.0,
-            // 'headers'  => ['Content-Type' => 'application/json', "Accept" => "application/json", 'Authorization' => "Basic " . $this->base64],
-            "auth"     => [
-                "admin",
-                "admin",
-            ],
+            'headers'  => ['Content-Type' => 'application/json', "Accept" => "application/json", 'Authorization' => "Basic " . $this->base64],
+            // "auth"     => [
+            //     "admin",
+            //     "admin",
+            // ],
         ]);
     }
 
@@ -54,9 +54,8 @@ class WoocomerceController extends Controller
             "content_raw" => "Howdy updated content.",
             "date"        => "2017-02-01T14:00:00+10:00",
         );
-//print_r(json_encode($params));die;
-        //$response = $client->request('POST');
-        $response = $this->restApiClient->post('posts/',
+        // dd(json_encode($params));
+        $response = $this->restApiClient->post('posts',
             ['body' => json_encode($params)]
         );
         echo "<pre>";
