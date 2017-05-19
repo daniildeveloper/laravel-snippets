@@ -43,7 +43,7 @@ class WoocomerceController extends Controller
             "auth"     => [
                 "admin",
                 "admin",
-            ]
+            ],
         ]);
     }
 
