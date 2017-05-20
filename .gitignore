@@ -5,6 +5,7 @@ public/vendors/
 /.idea
 Homestead.json
 Homestead.yaml
+.env
 
 /public/wordpress/*
 !/public/wordpress/wp-content/

@@ -49,17 +49,7 @@ class WoocomerceController extends Controller
 
     public function test()
     {
-        $params = array(
-            "title"       => "Hello Updated World!",
-            "content_raw" => "Howdy updated content.",
-            "date"        => "2017-02-01T14:00:00+10:00",
-        );
-        // dd(json_encode($params));
-        $response = $this->restApiClient->post('posts',
-            ['body' => json_encode($params)]
-        );
-        echo "<pre>";
-        echo $response->getBody();
+        $this->woo();
     }
 
     public function saveRequest(Request $req)
@@ -68,12 +58,10 @@ class WoocomerceController extends Controller
     public function woo()
     {
         $title = "Some product";
-        $data  = [
-            "id"                 => 12312321,
+        $data["product"]  = [
+            // "id"                 => 12312321,
             "title"              => "Some product",
             // "id"                 => 166,
-            "created_at"         => "2017-05-17T14:24:46Z",
-            "updated_at"         => "2017-05-17T14:26:23Z",
             "type"               => "simple",
             "status"             => "publish",
             "downloadable"       => false,
@@ -140,5 +128,19 @@ class WoocomerceController extends Controller
         ];
         // dd($this->woocommerce->get("products"));
         $this->woocommerce->post("products", $data);
+    }
+
+    public function restApiPost() {
+        $params = array(
+            "title"       => "Hello Updated World!",
+            "content" => "Howdy updated content.",
+            "type" => "product"
+        );
+        // dd(json_encode($params));
+        $response = $this->restApiClient->post('posts',
+            ['body' => json_encode($params)]
+        );
+        echo "<pre>";
+        echo $response->getBody();
     }
 }
