@@ -182,6 +182,9 @@ return [
         App\Providers\RouteServiceProvider::class,
         Pixelpeter\Woocommerce\WoocommerceServiceProvider::class,
 
+        // Storages Api
+        Anchu\Ftp\FtpServiceProvider::class,
+
     ],
 
     /*
@@ -210,6 +213,7 @@ return [
         'Eloquent'     => Illuminate\Database\Eloquent\Model::class,
         'Event'        => Illuminate\Support\Facades\Event::class,
         'File'         => Illuminate\Support\Facades\File::class,
+        "FTP"          => Anchu\Ftp::class,
         'Gate'         => Illuminate\Support\Facades\Gate::class,
         'JWTAuth'      => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory'   => Tymon\JWTAuth\Facades\JWTFactory::class,
@@ -231,6 +235,6 @@ return [
         'URL'          => Illuminate\Support\Facades\URL::class,
         'Validator'    => Illuminate\Support\Facades\Validator::class,
         'View'         => Illuminate\Support\Facades\View::class,
-        'Woocommerce' => Pixelpeter\Woocommerce\Facades\Woocommerce::class,
+        'Woocommerce'  => Pixelpeter\Woocommerce\Facades\Woocommerce::class,
     ],
 ];

@@ -49,7 +49,12 @@ class WoocomerceController extends Controller
 
     public function test()
     {
-        $this->woo();
+        $this->testFtp();
+    }
+
+    public function testFtp() {
+        $res = \FTP::connection("smartsol")->getDirListing();
+        dd($res);
     }
 
     public function saveRequest(Request $req)
