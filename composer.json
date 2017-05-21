@@ -24,7 +24,8 @@
         "automattic/woocommerce": "^1.2",
         "pixelpeter/laravel5-woocommerce-api-client": "^2.3",
         "anchu/ftp": "^2.0",
-        "andre_487/php_rutils": "^1.2"
+        "andre_487/php_rutils": "^1.2",
+        "nicolab/php-ftp-client": "^1.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

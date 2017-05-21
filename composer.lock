@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6be99bf9381525ffed37fc11a85801be",
-    "content-hash": "9d8f6da2a690a0933117ef3e1b7f81e3",
+    "hash": "eb92845b83b2c1d902cd71ab3bd39a23",
+    "content-hash": "a996e4b94da337929d112d8ff88fcd31",
     "packages": [
         {
             "name": "anchu/ftp",
@@ -1801,6 +1801,54 @@
                 "time"
             ],
             "time": "2017-01-16 07:55:07"
+        },
+        {
+            "name": "nicolab/php-ftp-client",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Nicolab/php-ftp-client.git",
+                "reference": "0e0c7666bdc3fb9fc9e63b065c84979588101708"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Nicolab/php-ftp-client/zipball/0e0c7666bdc3fb9fc9e63b065c84979588101708",
+                "reference": "0e0c7666bdc3fb9fc9e63b065c84979588101708",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "FtpClient": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Tallefourtane",
+                    "email": "dev@nicolab.net",
+                    "homepage": "http://nicolab.net"
+                }
+            ],
+            "description": "A flexible FTP and SSL-FTP client for PHP. This lib provides helpers easy to use to manage the remote files.",
+            "homepage": "https://github.com/Nicolab/php-ftp-client",
+            "keywords": [
+                "file",
+                "ftp",
+                "helper",
+                "lib",
+                "server",
+                "sftp",
+                "ssl",
+                "ssl-ftp"
+            ],
+            "time": "2017-01-20 06:44:54"
         },
         {
             "name": "nikic/php-parser",
