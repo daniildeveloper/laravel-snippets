@@ -56,8 +56,8 @@ class WoocomerceController extends Controller
 
     public function test()
     {
-        $this->testFtp();
-        // $this->parseSvetApi();
+        // $this->testFtp();
+        $this->parseSvetApi();
         // $this->clearProducts();
     }
 
@@ -92,12 +92,7 @@ class WoocomerceController extends Controller
             $imgSrc    = $link_html->find('.img-holder img')[0]->attr['src'];
             $imageName = '2017/05/' . Rutils::translit()->slugify($itemTitle) . '.png';
             $slugified = Rutils::translit()->slugify($itemTitle);
-            \Storage::put($imageName, file_get_contents($base_url . $imgSrc));
-
-            // upload file using ftp
-            \FTP::connection("smartsol")->changeDir("nomadsynergy.kz/wp-content/uploads/");
-            \FTP::connection("smartsol")->currentDir();
-            dd(\FTP::connection("smartsol")->uploadFile(base_path() . \Storage::url($imageName), $slugified . ".png", FTP_BINARY));
+            // \Storage::put($imageName, file_get_contents($base_url . $imgSrc));
 
             $data["product"] = [
                 "title"              => "$itemTitle",
@@ -147,13 +142,13 @@ class WoocomerceController extends Controller
                     // "id"         => 14,
                     // "created_at" => "2017-05-11T08:27:02Z",
                     // "updated_at" => "2017-05-11T08:27:02Z",
-                    "src"      => $this->remoteShop . $imageName,
+                    "src"      => $this->remoteShop ."/wp-content/uploads/". $imageName,
                     "title"    => $slugified,
                     "alt"      => $itemTitle,
                     "position" => 0,
                 ]],
                 // "featured_src"       => "http://localhost/nomad/wp-content/uploads/2017/05/ZDMcAkCVqk.jpg",
-                "featured_src"       => $this->remoteShop . $imagePath,
+                "featured_src"       => $this->remoteShop ."/wp-content/uploads/". $imageName,
                 "attributes"         => [],
                 "downloads"          => [],
                 "download_limit"     => -1,
@@ -166,7 +161,7 @@ class WoocomerceController extends Controller
                 "grouped_products"   => [],
                 "menu_order"         => 0,
             ];
-            $this->woocommerce->post("products", $data);
+            $this->nomad->post("products", $data);
         }
 
     }
