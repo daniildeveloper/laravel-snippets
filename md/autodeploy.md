@@ -32,3 +32,6 @@ Type *ctrl+d* to save. Give correct permissions.
 ```bash
 chmod +x post-receive
 ```
+
+
+## From github to server

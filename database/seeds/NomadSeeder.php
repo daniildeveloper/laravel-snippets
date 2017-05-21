@@ -26,7 +26,6 @@ class NomadSeeder extends Seeder
 
         $c = new C();
         $r = $c->test();
-        dd($r);
     }
 
     // public function parse
