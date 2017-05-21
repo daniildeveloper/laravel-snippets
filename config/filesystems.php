@@ -45,7 +45,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('../public/wordpress/wp-content/uploads/woocomerce'),
+            'root' => storage_path('../public/wordpress/wp-content/wp-upload/'),
         ],
 
         'public' => [
