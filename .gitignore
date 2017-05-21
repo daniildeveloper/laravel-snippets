@@ -16,4 +16,4 @@ Homestead.yaml
 /public/another/shopware/vendor
 
 #remove simpehtmldom instances
-app//Http/Controllers/Wordpress/simpehtmldom
+app/Http/Controllers/Wordpress/simplehtmldom
