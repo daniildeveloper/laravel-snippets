@@ -50,7 +50,8 @@ class WoocomerceController extends Controller
 
     public function test()
     {
-        $this->parseSvetApi();
+        // $this->parseSvetApi();
+        $this->clearProducts();
     }
 
     public function testFtp()
@@ -279,6 +280,20 @@ class WoocomerceController extends Controller
             Storage::put('cat-5/' . $item->slug . '/preview.png', file_get_contents($base_url . $imgSrc));
         }
 
+    }
+
+    public function clearProducts()
+    {
+        $d           = $this->woocommerce->get("products");
+        $idsToDelete = [];
+
+        foreach ($d["products"] as $product) {
+            $idsToDelete[] = $product["id"];
+        }
+
+        foreach ($idsToDelete as $key) {
+            $this->woocommerce->delete("products/$key", ["force" => true]);
+        }
     }
 
 }
