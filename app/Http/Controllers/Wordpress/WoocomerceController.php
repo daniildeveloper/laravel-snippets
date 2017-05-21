@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Wordpress;
 
 use App\Http\Controllers\Controller;
 use Automattic\WooCommerce\Client;
+use FtpClient\FtpClient;
 use GuzzleHttp\Client as Guzzle;
 use Illuminate\Http\Request;
 use php_rutils\Rutils;
 use \FTP;
-use FtpClient\FtpClient;
 
 // use WooCommerce;
 
@@ -97,7 +97,7 @@ class WoocomerceController extends Controller
             // upload file using ftp
             \FTP::connection("smartsol")->changeDir("nomadsynergy.kz/wp-content/uploads/");
             \FTP::connection("smartsol")->currentDir();
-            dd(\FTP::connection("smartsol")->uploadFile(base_path().\Storage::url($imageName), $slugified.".png", FTP_BINARY));
+            dd(\FTP::connection("smartsol")->uploadFile(base_path() . \Storage::url($imageName), $slugified . ".png", FTP_BINARY));
 
             $data["product"] = [
                 "title"              => "$itemTitle",
@@ -176,7 +176,8 @@ class WoocomerceController extends Controller
         $ftp = new FtpClient();
         $ftp->connect(env("SMARTSOL_FTP_HOST"));
         $ftp->login(env("SMARTSOL_FTP_USER"), env("SMARTSOL_FTP_PASS"));
-        dd($ftp->scanDir("nomadsynergy.kz/wp-content/uploads/", true));
+        // dd(base_path());
+        $ftp->putAll(base_path()."\storage\app\public\wp-upload\\2017\\05", "nomadsynergy.kz/wp-content/uploads/2017/05", FTP_BINARY);
     }
 
     public function saveRequest(Request $req)
