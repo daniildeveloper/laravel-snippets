@@ -8,7 +8,6 @@ use FtpClient\FtpClient;
 use GuzzleHttp\Client as Guzzle;
 use Illuminate\Http\Request;
 use php_rutils\Rutils;
-use \FTP;
 
 // use WooCommerce;
 
@@ -57,8 +56,110 @@ class WoocomerceController extends Controller
     public function test()
     {
         // $this->testFtp();
-        $this->parseSvetApi();
+        // $this->parseSvetApi();
         // $this->clearProducts();
+        $this->parseMetallApi();
+    }
+
+    public function parseMetallApi()
+    {
+        // dd($this->nomad->get("products/categories"));
+        $metalCategoryRus = "Металлоконструкции";
+        // create categorie fpr metall
+        $metalCategory["product_category"] = [
+            "name"   => "Металлоконструкции",
+            "slug"   => Rutils::translit()->slugify($metalCategoryRus),
+            "parent" => 0,
+        ];
+        // create metall category
+        // $this->nomad->post("products/categories", $metalCategory);
+
+        include_once "simplehtmldom/simple_html_dom.php";
+        $stroiMetall = "http://www.npommz.ru/stroitelnye-metallokonstrukcii";
+        $products    = []; //products
+
+        $stroiHtml = file_get_html($stroiMetall);
+
+        // crete metall
+        $metall                = [];
+        $metall["title"]       = $stroiHtml->find(".title")[0]->plaintext;
+        $metall["description"] = $stroiHtml->find(".content")[0]->innertext;
+        $metall["categories"]  = [$metalCategory["product_category"]["slug"]];
+        $products[]            = $metall;
+
+        // create ns
+        $nsLink            = "http://www.npommz.ru/nestandartnye-metallokonstrukcii";
+        $nsHtml            = file_get_html($nsLink);
+        $ns                = [];
+        $ns["title"]       = $nsHtml->find(".title")[0]->plaintext;
+        $ns["description"] = $nsHtml->find(".content")[0]->innertext;
+        $ns["categories"]  = [$metalCategory["product_category"]["slug"]];
+        $products[]        = $ns;
+
+        // dd($products);
+
+        foreach ($products as $key) {
+            $keySlug         = Rutils::translit()->slugify($key["title"]);
+            $data            = [];
+            $data["product"] = [
+                "title"              => $key['title'],
+                "type"               => "simple",
+                "status"             => "publish",
+                "downloadable"       => false,
+                "virtual"            => false,
+                "permalink"          => $this->remoteShop . "/shop/" . $keySlug,
+                "sku"                => "",
+                "price"              => "",
+                "regular_price"      => "",
+                "sale_price"         => null,
+                "price_html"         => "",
+                "taxable"            => true,
+                "tax_status"         => "taxable",
+                "tax_class"          => "",
+                "managing_stock"     => false,
+                "stock_quantity"     => null,
+                "in_stock"           => true,
+                "backorders_allowed" => false,
+                "backordered"        => false,
+                "sold_individually"  => false,
+                "purchaseable"       => false,
+                "featured"           => false,
+                "visible"            => true,
+                "catalog_visibility" => "visible",
+                "on_sale"            => false,
+                "product_url"        => "",
+                "button_text"        => "",
+                "weight"             => null,
+                "shipping_required"  => true,
+                "shipping_taxable"   => true,
+                "shipping_class"     => "",
+                "shipping_class_id"  => null,
+                "description"        => $key['description'],
+                "short_description"  => "",
+                "reviews_allowed"    => true,
+                "average_rating"     => "0.00",
+                "rating_count"       => 0,
+                "related_ids"        => [],
+                "upsell_ids"         => [],
+                "cross_sell_ids"     => [],
+                "parent_id"          => 0,
+                "categories"         => $key["categories"],
+                "tags"               => [],
+                "attributes"         => [],
+                "downloads"          => [],
+                "download_limit"     => -1,
+                "download_expiry"    => -1,
+                "download_type"      => "standard",
+                "purchase_note"      => "",
+                "total_sales"        => 0,
+                "variations"         => [],
+                "parent"             => [],
+                "grouped_products"   => [],
+                "menu_order"         => 0,
+            ];
+            $this->nomad->post("products", $data);
+        }
+
     }
 
     /**
@@ -142,13 +243,13 @@ class WoocomerceController extends Controller
                     // "id"         => 14,
                     // "created_at" => "2017-05-11T08:27:02Z",
                     // "updated_at" => "2017-05-11T08:27:02Z",
-                    "src"      => $this->remoteShop ."/wp-content/uploads/". $imageName,
+                    "src"      => $this->remoteShop . "/wp-content/uploads/" . $imageName,
                     "title"    => $slugified,
                     "alt"      => $itemTitle,
                     "position" => 0,
                 ]],
                 // "featured_src"       => "http://localhost/nomad/wp-content/uploads/2017/05/ZDMcAkCVqk.jpg",
-                "featured_src"       => $this->remoteShop ."/wp-content/uploads/". $imageName,
+                "featured_src"       => $this->remoteShop . "/wp-content/uploads/" . $imageName,
                 "attributes"         => [],
                 "downloads"          => [],
                 "download_limit"     => -1,
@@ -172,7 +273,7 @@ class WoocomerceController extends Controller
         $ftp->connect(env("SMARTSOL_FTP_HOST"));
         $ftp->login(env("SMARTSOL_FTP_USER"), env("SMARTSOL_FTP_PASS"));
         // dd(base_path());
-        $ftp->putAll(base_path()."\storage\app\public\wp-upload\\2017\\05", "nomadsynergy.kz/wp-content/uploads/2017/05", FTP_BINARY);
+        $ftp->putAll(base_path() . "\storage\app\public\wp-upload\\2017\\05", "nomadsynergy.kz/wp-content/uploads/2017/05", FTP_BINARY);
     }
 
     public function saveRequest(Request $req)
