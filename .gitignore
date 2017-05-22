@@ -8,8 +8,6 @@ Homestead.yaml
 .env
 
 /public/wordpress/*
-!/public/wordpress/wp-content/
-/public/wordpress/wp-content/uploads
 
 #submodules
 /public/another/mautic/vendor
