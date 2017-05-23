@@ -58,14 +58,97 @@ class WoocomerceController extends Controller
         // $this->testFtp();
         // $this->parseSvetApi();
         // $this->clearProducts();
-        $this->parseTsspApi();
+        // $this->parseTsspApi();
+        $this->parseAmirsanApi();
+    }
+
+    public function parseAmirsanApi()
+    {
+        ini_set('allow_url_fopen', '1');
+        include_once "simplehtmldom/simple_html_dom.php";
+        $base_url_single = "http://amirsana.kz";
+        $html            = file_get_html($base_url_single);
+        //берем все менюшки
+        $menu = $html->find(".desktop-catalog-menu .menu-item a");
+        //transform array by deleting unnecesary menu items
+        $transformedMenu = [];
+        for ($i = 1; $i < 4; $i++) {
+            $transformedMenu[] = $menu[$i];
+        }
+        $menu = $transformedMenu;
+
+        $secondChildHrefs = [];
+        foreach ($menu as $menuItem) {
+            // get first child category name
+            // $catName = $menuItem->find("span.caption")[0]->innertext;
+            // uncomment for production parsing
+            // save first child category
+            // $sizFirstChildCategory            = new Categories();
+            // $sizFirstChildCategory->name      = $catName;
+            // $sizFirstChildCategory->parent_id = $this->sizCategoryId;
+            // $sizFirstChildCategory->save();
+            //category id
+            $sizFirstChildCategoryId = isset($sizFirstChildCategory) ? $sizFirstChildCategory->id : 1;
+
+            // link to shop preview of category
+            $sizFirstChildCategoryLinkToShop = $menuItem->href;
+
+            $sizFirstChildCategoryShopIndex = file_get_html($base_url_single . $sizFirstChildCategoryLinkToShop);
+            $secondChildCategoriesList      = $sizFirstChildCategoryShopIndex->find("ul.catalog-menu li.expanded ul.children-items li a");
+
+            // parse second-child categories
+            foreach ($secondChildCategoriesList as $sccl) {
+                $secondChildHrefs[] = $sccl->href;
+            }
+        }
+        $productItemsHrefs = [];
+        // parser all catalog items
+        foreach ($secondChildHrefs as $p) {
+            $toParse           = $secondChildHrefs[0];
+            $catalogItems      = file_get_html($base_url_single . $toParse);
+            $catalogItemsHrefs = $catalogItems->find(".catalog-container .product_list .product-link .product-image a");
+            foreach ($catalogItemsHrefs as $key) {
+                $productItemsHrefs[] = $key->href;
+            }
+        }
+        // dd($productItemsHrefs);
+        unset($secondChildHrefs);
+        unset($transformedMenu);
+        foreach ($productItemsHrefs as $productHref) {
+            //parse each items
+            // dd($productHref);
+            \Log::info('product' . $productHref);
+            $product = file_get_html($base_url_single . $productHref);
+            
+            if(false !== strpos($product->find("title")[0]->plaintext, "404 - HTTP not found")) {
+                dd("404");
+            } else {
+                \Log::info('Parsed succesfly');
+            }
+
+            // $productContainer = $product->find(".content-wrapper .content");
+            // $infoArray        = $product->find(".item_info_section");
+            // $info             = "";
+            // foreach ($infoArray as $i) {
+            //     $info .= $i;
+            // }
+            // //save product to database
+            // $productModel              = new Product();
+            // $productModel->title       = $product->find("h1")[0]->plaintext;
+            // $productModel->description = $info;
+            // $productModel->category_id = 1;
+            // $productModel->imagePath   = "preview.png";
+            // $productModel->save();
+            // Storage::put('cat-1/' . $productModel->id . '/preview.png', file_get_contents($base_url_single . $product->find('.bx_bigimages_aligner_outer img')[0]->attr['src']));
+        }
     }
 
     /**
      * parsing tssp doesnt work correctly
      * @return [type] [description]
      */
-    public function parseTsspApi() {
+    public function parseTsspApi()
+    {
         include_once "simplehtmldom/simple_html_dom.php";
         $base_url        = "http://tssp.kz/";
         $base_url_single = "http://tssp.kz";
