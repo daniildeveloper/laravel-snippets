@@ -61,6 +61,10 @@ class WoocomerceController extends Controller
         $this->parseTsspApi();
     }
 
+    /**
+     * parsing tssp doesnt work correctly
+     * @return [type] [description]
+     */
     public function parseTsspApi() {
         include_once "simplehtmldom/simple_html_dom.php";
         $base_url        = "http://tssp.kz/";
@@ -90,76 +94,7 @@ class WoocomerceController extends Controller
         foreach ($links as $l) {
             $main_arr[] = $l->attr['href'];
         }
-        unset($links);
-
-        // берем все категории
-        $categories = [];
-        foreach ($main_arr as $m) {
-            // parse
-            $ci = curl_init($base_url_single . $m);
-            curl_setopt($ci, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ci, CURLOPT_HEADER, true);
-            $header[] = "Connection: keep-alive";
-            $header[] = "Pragma: no-cache";
-            $header[] = "Cache-Control: no-cache";
-            $header[] = "Upgrade-Insecure-Requests: 1";
-            $header[] = "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0";
-            $header[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
-            curl_setopt($ci, CURLOPT_HTTPHEADER, $header);
-            curl_setopt($ci, CURLINFO_HEADER_OUT, true);
-            curl_setopt($ci, CURLOPT_FOLLOWLOCATION, true);
-            $c    = curl_exec($ci);
-            $html = str_get_html($c);
-
-            $links = $html->find('ul.sidebar-menu li a');
-
-            foreach ($links as $link) {
-                $l = $link->attr['href'];
-                if (strlen($l) > 15) {
-                    $categories[] = $link->attr['href'];
-                }
-
-            }
-            // parse and save single product for test
-
-            // prepare curl to download file
-            // $source  = $base_url_single . $html->find("a.driftzoom img")->attr['src'];
-            // $opts    = array('http' => array('header' => "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0"));
-            // $context = stream_context_create($opts);
-
-            // Storage::put("cat-3/$product->id/preview.jpg", file_get_contents($source, false, $context));
-        }
-        unset($c);
-        unset($ci);
-
-        $catalogItems = [];
-        foreach ($categories as $key) {
-
-            $ci = curl_init($key);
-            curl_setopt($ci, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ci, CURLOPT_HEADER, true);
-            $header[] = "Connection: keep-alive";
-            $header[] = "Pragma: no-cache";
-            $header[] = "Cache-Control: no-cache";
-            $header[] = "Upgrade-Insecure-Requests: 1";
-            $header[] = "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0";
-            $header[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
-            curl_setopt($ci, CURLOPT_HTTPHEADER, $header);
-            curl_setopt($ci, CURLINFO_HEADER_OUT, true);
-            curl_setopt($ci, CURLOPT_FOLLOWLOCATION, true);
-            $c     = curl_exec($ci);
-            $html  = str_get_html($c);
-            $links = $html->find(".catalog-items-container .row .col-md-12 .card_products p a");
-
-            foreach ($links as $l) {
-                $catalogItems[] = $l->attr['href'];
-            }
-            unset($ci);
-            unset($c);
-
-        }
-        
-        dd($catalogItems);
+        dd($main_arr);
     }
 
     /**
