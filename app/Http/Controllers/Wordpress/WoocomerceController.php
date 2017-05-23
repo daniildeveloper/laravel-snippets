@@ -69,7 +69,7 @@ class WoocomerceController extends Controller
         include_once "simplehtmldom/simple_html_dom.php";
         $base_url        = "http://tssp.kz/";
         $base_url_single = "http://tssp.kz";
-        $ci              = curl_init($base_url);
+        $ci              = curl_init($base_url_single);
         curl_setopt($ci, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ci, CURLOPT_HEADER, true);
         $header[] = "Connection: keep-alive";
@@ -78,22 +78,19 @@ class WoocomerceController extends Controller
         $header[] = "Upgrade-Insecure-Requests: 1";
         $header[] = "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0";
         $header[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
-        // $header[] = "Accept-Encoding: gzip, deflate";
-        // $header[] = "Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3";
+        $header[] = "Accept-Encoding: gzip, deflate";
+        $header[] = "Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3";
         // $header[] = "Cookie: PHPSESSID=6gr04a7dmpdft1ekojd3e7v9u2; referrer=typein; entry_page=http%3A%2F%2Fwww.yell.ru%2Fmoscow%2Fcom%2Fmosvet-mosvet-veterinarnaya-klinika_2028012%2F; edition=moscow; browserId=8zmBJaAVzRveB6dfAX8pry7uXVuHbP; _ym_uid=1477249415409822960; _ym_isad=2; _ga=GA1.2.1396808801.1477249416; _dc_gtm_UA-3064419-7=1";
-        curl_setopt($ci, CURLOPT_HTTPHEADER, $header);
+        // curl_setopt($ci, CURLOPT_HTTPHEADER, $header);
         curl_setopt($ci, CURLINFO_HEADER_OUT, true);
         curl_setopt($ci, CURLOPT_FOLLOWLOCATION, true);
         $c    = curl_exec($ci);
         $html = str_get_html($c);
+        dd($c);
         // unset($ci);
         //get all neeed menu links
         $links    = $html->find('ul.navbar-nav li.drop-menu-link', 0)->find('.row .col-md-4 ul li a');
         $main_arr = [];
-
-        foreach ($links as $l) {
-            $main_arr[] = $l->attr['href'];
-        }
         dd($main_arr);
     }
 
