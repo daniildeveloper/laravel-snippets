@@ -58,7 +58,108 @@ class WoocomerceController extends Controller
         // $this->testFtp();
         // $this->parseSvetApi();
         // $this->clearProducts();
-        $this->parseEmostApi();
+        $this->parseTsspApi();
+    }
+
+    public function parseTsspApi() {
+        include_once "simplehtmldom/simple_html_dom.php";
+        $base_url        = "http://tssp.kz/";
+        $base_url_single = "http://tssp.kz";
+        $ci              = curl_init($base_url);
+        curl_setopt($ci, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ci, CURLOPT_HEADER, true);
+        $header[] = "Connection: keep-alive";
+        $header[] = "Pragma: no-cache";
+        $header[] = "Cache-Control: no-cache";
+        $header[] = "Upgrade-Insecure-Requests: 1";
+        $header[] = "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0";
+        $header[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+        // $header[] = "Accept-Encoding: gzip, deflate";
+        // $header[] = "Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3";
+        // $header[] = "Cookie: PHPSESSID=6gr04a7dmpdft1ekojd3e7v9u2; referrer=typein; entry_page=http%3A%2F%2Fwww.yell.ru%2Fmoscow%2Fcom%2Fmosvet-mosvet-veterinarnaya-klinika_2028012%2F; edition=moscow; browserId=8zmBJaAVzRveB6dfAX8pry7uXVuHbP; _ym_uid=1477249415409822960; _ym_isad=2; _ga=GA1.2.1396808801.1477249416; _dc_gtm_UA-3064419-7=1";
+        curl_setopt($ci, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ci, CURLINFO_HEADER_OUT, true);
+        curl_setopt($ci, CURLOPT_FOLLOWLOCATION, true);
+        $c    = curl_exec($ci);
+        $html = str_get_html($c);
+        // unset($ci);
+        //get all neeed menu links
+        $links    = $html->find('ul.navbar-nav li.drop-menu-link', 0)->find('.row .col-md-4 ul li a');
+        $main_arr = [];
+
+        foreach ($links as $l) {
+            $main_arr[] = $l->attr['href'];
+        }
+        unset($links);
+
+        // берем все категории
+        $categories = [];
+        foreach ($main_arr as $m) {
+            // parse
+            $ci = curl_init($base_url_single . $m);
+            curl_setopt($ci, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ci, CURLOPT_HEADER, true);
+            $header[] = "Connection: keep-alive";
+            $header[] = "Pragma: no-cache";
+            $header[] = "Cache-Control: no-cache";
+            $header[] = "Upgrade-Insecure-Requests: 1";
+            $header[] = "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0";
+            $header[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+            curl_setopt($ci, CURLOPT_HTTPHEADER, $header);
+            curl_setopt($ci, CURLINFO_HEADER_OUT, true);
+            curl_setopt($ci, CURLOPT_FOLLOWLOCATION, true);
+            $c    = curl_exec($ci);
+            $html = str_get_html($c);
+
+            $links = $html->find('ul.sidebar-menu li a');
+
+            foreach ($links as $link) {
+                $l = $link->attr['href'];
+                if (strlen($l) > 15) {
+                    $categories[] = $link->attr['href'];
+                }
+
+            }
+            // parse and save single product for test
+
+            // prepare curl to download file
+            // $source  = $base_url_single . $html->find("a.driftzoom img")->attr['src'];
+            // $opts    = array('http' => array('header' => "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0"));
+            // $context = stream_context_create($opts);
+
+            // Storage::put("cat-3/$product->id/preview.jpg", file_get_contents($source, false, $context));
+        }
+        unset($c);
+        unset($ci);
+
+        $catalogItems = [];
+        foreach ($categories as $key) {
+
+            $ci = curl_init($key);
+            curl_setopt($ci, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ci, CURLOPT_HEADER, true);
+            $header[] = "Connection: keep-alive";
+            $header[] = "Pragma: no-cache";
+            $header[] = "Cache-Control: no-cache";
+            $header[] = "Upgrade-Insecure-Requests: 1";
+            $header[] = "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0";
+            $header[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+            curl_setopt($ci, CURLOPT_HTTPHEADER, $header);
+            curl_setopt($ci, CURLINFO_HEADER_OUT, true);
+            curl_setopt($ci, CURLOPT_FOLLOWLOCATION, true);
+            $c     = curl_exec($ci);
+            $html  = str_get_html($c);
+            $links = $html->find(".catalog-items-container .row .col-md-12 .card_products p a");
+
+            foreach ($links as $l) {
+                $catalogItems[] = $l->attr['href'];
+            }
+            unset($ci);
+            unset($c);
+
+        }
+        
+        dd($catalogItems);
     }
 
     /**
