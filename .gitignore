@@ -6,6 +6,7 @@ public/vendors/
 Homestead.json
 Homestead.yaml
 .env
+.vscode/ftp-sync.json
 
 /public/wordpress/*
 

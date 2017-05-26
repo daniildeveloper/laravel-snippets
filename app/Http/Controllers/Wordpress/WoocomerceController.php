@@ -126,6 +126,7 @@ class WoocomerceController extends Controller
                 \Log::info('Parsed succesfly');
             }
 
+            
             // $productContainer = $product->find(".content-wrapper .content");
             // $infoArray        = $product->find(".item_info_section");
             // $info             = "";
