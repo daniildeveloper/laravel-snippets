@@ -12,47 +12,55 @@ use php_rutils\Rutils;
 // use WooCommerce;
 
 /**
- * Controller to iteract with wordpress woocomerce
- */
+* Controller to iteract with wordpress woocomerce
+*/
 class WoocomerceController extends Controller
 {
     protected $nomadUri = "http://localhost/nomad/wp-json/wp/v2/";
     protected $woocommerce;
-
+    
     protected $nomad;
-
+    
     protected $base64;
-
+    
     protected $restApiClient;
-
+    
+    protected $remoteDaniiltserin;
+    
+    
+    protected $remoteTestClient;
+    
     public $localShop = "http://localhost/nomad";
-
+    
     public $remoteShop = "http://nomadsynergy.kz";
-
+    
+    public $remoteTest = "https://as.daniiltserin.ru";
+    
     public function __construct()
     {
         $this->base64      = base64_encode("super:super");
         $this->woocommerce = new Client("http://localhost/nomad",
-            "ck_5c17b31649c496ad475980cdee2e0b6c0f223330",
-            "cs_36c1dc83b4aa012e67dc53cd460bec3e87118bb3"
+        "ck_5c17b31649c496ad475980cdee2e0b6c0f223330",
+        "cs_36c1dc83b4aa012e67dc53cd460bec3e87118bb3"
         );
-
+        
         $this->nomad = new Client("http://nomadsynergy.kz",
-            "ck_63ab9cbb9f39036142a8fd3123db1b5b45317a34",
-            "cs_c66bf6869c67bacad335427cc1946ea623641a72"
+        "ck_63ab9cbb9f39036142a8fd3123db1b5b45317a34",
+        "cs_c66bf6869c67bacad335427cc1946ea623641a72"
         );
-
+        
         $this->restApiClient = new Guzzle([
-            "base_uri" => $this->nomadUri,
-            "timeout"  => 40.0,
-            'headers'  => ['Content-Type' => 'application/json', "Accept" => "application/json", 'Authorization' => "Basic " . $this->base64],
-            // "auth"     => [
-            //     "admin",
-            //     "admin",
-            // ],
+        "base_uri" => $this->nomadUri,
+        "timeout"  => 40.0,
+        'headers'  => ['Content-Type' => 'application/json', "Accept" => "application/json", 'Authorization' => "Basic " . $this->base64],
+        // "auth"     => [
+        //     "admin",
+        //     "admin",
+        // ],
         ]);
+        $this->remoteDaniiltserin = new Client($this->remoteTest, env("DANIILTSERIN_WOOCOMERCE_PK"), env("DANIITLSERIN_WOOCOMERCE_PK"));
     }
-
+    
     public function test()
     {
         // $this->testFtp();
@@ -61,10 +69,11 @@ class WoocomerceController extends Controller
         // $this->parseTsspApi();
         $this->parseAmirsanApi();
     }
-
+    
     public function parseAmirsanApi()
     {
         ini_set('allow_url_fopen', '1');
+        $shop = $this->remoteTest;
         include_once "simplehtmldom/simple_html_dom.php";
         $base_url_single = "http://amirsana.kz";
         $html            = file_get_html($base_url_single);
@@ -76,7 +85,7 @@ class WoocomerceController extends Controller
             $transformedMenu[] = $menu[$i];
         }
         $menu = $transformedMenu;
-
+        
         $secondChildHrefs = [];
         foreach ($menu as $menuItem) {
             // get first child category name
@@ -89,13 +98,13 @@ class WoocomerceController extends Controller
             // $sizFirstChildCategory->save();
             //category id
             $sizFirstChildCategoryId = isset($sizFirstChildCategory) ? $sizFirstChildCategory->id : 1;
-
+            
             // link to shop preview of category
             $sizFirstChildCategoryLinkToShop = $menuItem->href;
-
+            
             $sizFirstChildCategoryShopIndex = file_get_html($base_url_single . $sizFirstChildCategoryLinkToShop);
             $secondChildCategoriesList      = $sizFirstChildCategoryShopIndex->find("ul.catalog-menu li.expanded ul.children-items li a");
-
+            
             // parse second-child categories
             foreach ($secondChildCategoriesList as $sccl) {
                 $secondChildHrefs[] = $sccl->href;
@@ -115,17 +124,107 @@ class WoocomerceController extends Controller
         unset($secondChildHrefs);
         unset($transformedMenu);
         foreach ($productItemsHrefs as $productHref) {
+            
             //parse each items
             // dd($productHref);
             \Log::info('product' . $productHref);
             $product = file_get_html($base_url_single . $productHref);
             
-            if(false !== strpos($product->find("title")[0]->plaintext, "404 - HTTP not found")) {
+            
+            if(strlen($product->find(".content")[0]->plaintext) < 40) {
                 dd("404");
             } else {
-                \Log::info('Parsed succesfly');
+                
+                $imgSrc    = $link_html->find('.img-holder img')[0]->attr['src'];
+                $imageName = '2017/05/' . Rutils::translit()->slugify($itemTitle) . '.png';
+                $slugified = Rutils::translit()->slugify($itemTitle);
+                $title = $product->find("h1")[0]->plaintext;
+                $slug = Rutils::translit()->slugify($title);
+                $imgSrc = $product->find("bx_bigimages_aligner_outer img")->attr("src");
+                $imageName = "2017/05".$slug.".jpg";
+                \Storage::put($imageName, file_get_contents($base_url_single. $imgSrc));
+                
+                $ftp = new FtpClient();
+                $ftp->connect(env("SMARTSOL_FTP_HOST"));
+                $ftp->login(env("SMARTSOL_FTP_USER"), env("SMARTSOL_FTP_PASS"));
+                // dd(base_path());
+                $ftp->putAll(base_path() . "\public\wordpress\wp-content\wp-upload\\2017\\05\\emost", "/var/www/as/wp-content/uploads/2017/05", FTP_BINARY);
+                
+                $infoArray        = $product->find(".item_info_section");
+                $info             = "";
+                foreach ($infoArray as $i) {
+                    $info .= $i;
+                }
+                
+                $data["product"] = [
+                "title"              => $title,
+                "type"               => "simple",
+                "status"             => "publish",
+                "downloadable"       => false,
+                "virtual"            => false,
+                "permalink"          => $shop . "/shop/" . $slug,
+                "sku"                => "",
+                "price"              => "",
+                "regular_price"      => "",
+                "sale_price"         => null,
+                "price_html"         => "",
+                "taxable"            => true,
+                "tax_status"         => "taxable",
+                "tax_class"          => "",
+                "managing_stock"     => false,
+                "stock_quantity"     => null,
+                "in_stock"           => true,
+                "backorders_allowed" => false,
+                "backordered"        => false,
+                "sold_individually"  => false,
+                "purchaseable"       => false,
+                "featured"           => false,
+                "visible"            => true,
+                "catalog_visibility" => "visible",
+                "on_sale"            => false,
+                "product_url"        => "",
+                "button_text"        => "",
+                "weight"             => null,
+                "shipping_required"  => true,
+                "shipping_taxable"   => true,
+                "shipping_class"     => "",
+                "shipping_class_id"  => null,
+                "description"        => $info,
+                "short_description"  => "",
+                "reviews_allowed"    => true,
+                "average_rating"     => "0.00",
+                "rating_count"       => 0,
+                "related_ids"        => [],
+                "upsell_ids"         => [],
+                "cross_sell_ids"     => [],
+                "parent_id"          => 0,
+                "categories"         => [],
+                "tags"               => [],
+                "attributes"         => [],
+                "downloads"          => [],
+                "download_limit"     => -1,
+                "download_expiry"    => -1,
+                "download_type"      => "standard",
+                "purchase_note"      => "",
+                "total_sales"        => 0,
+                "variations"         => [],
+                "parent"             => [],
+                "grouped_products"   => [],
+                "menu_order"         => 0,
+                "images"             => [[
+                // "id"         => 14,
+                // "created_at" => "2017-05-11T08:27:02Z",
+                // "updated_at" => "2017-05-11T08:27:02Z",
+                "src"      => $shop . "/wp-content/uploads/2017/05/" . $slug . ".jpg",
+                "title"    => $slug,
+                "alt"      => $title,
+                "position" => 0,
+                ]],
+                ];
+                $this->remoteDaniiltserin->post("products", $data);
+                
             }
-
+            
             
             // $productContainer = $product->find(".content-wrapper .content");
             // $infoArray        = $product->find(".item_info_section");
@@ -143,11 +242,11 @@ class WoocomerceController extends Controller
             // Storage::put('cat-1/' . $productModel->id . '/preview.png', file_get_contents($base_url_single . $product->find('.bx_bigimages_aligner_outer img')[0]->attr['src']));
         }
     }
-
+    
     /**
-     * parsing tssp doesnt work correctly
-     * @return [type] [description]
-     */
+    * parsing tssp doesnt work correctly
+    * @return [type] [description]
+    */
     public function parseTsspApi()
     {
         include_once "simplehtmldom/simple_html_dom.php";
@@ -177,137 +276,137 @@ class WoocomerceController extends Controller
         $main_arr = [];
         dd($main_arr);
     }
-
+    
     /**
-     * this function parse and store all items from npommz to nomadsynergy.kz database
-     * @return happy Mark
-     */
+    * this function parse and store all items from npommz to nomadsynergy.kz database
+    * @return happy Mark
+    */
     public function parseEmostApi()
     {
         // create ctaegory
         $eCat                    = "Емкостное оборудование";
         $cat["product_category"] = [
-            "name"   => $eCat,
-            "slug"   => Rutils::translit()->slugify($eCat),
-            "parent" => 0,
+        "name"   => $eCat,
+        "slug"   => Rutils::translit()->slugify($eCat),
+        "parent" => 0,
         ];
         // $this->nomad->post("products/categories", $cat);
         // end category create
-
+        
         // parse all links
         include_once "simplehtmldom/simple_html_dom.php";
         $baseUrl = "http://www.npommz.ru/emkostnoe-oborudovanie";
         $html    = file_get_html($baseUrl);
         $aDOM    = $html->find(".wp-caption a");
         $links   = $this->getHrefs($aDOM);
-
+        
         $ftp = new FtpClient();
         $ftp->connect(env("SMARTSOL_FTP_HOST"));
         $ftp->login(env("SMARTSOL_FTP_USER"), env("SMARTSOL_FTP_PASS"));
         // dd(base_path());
         $ftp->putAll(base_path() . "\public\wordpress\wp-content\wp-upload\\2017\\05\\emost", "nomadsynergy.kz/wp-content/uploads/2017/05", FTP_BINARY);
-
+        
         foreach ($links as $link) {
             $htm   = file_get_html("http:" . $link);
             $data  = [];
             $title = $htm->find(".title")[0]->plaintext;
             $slug  = Rutils::translit()->slugify($title);
-
+            
             $data["product"] = [
-                "title"              => $htm->find(".title")[0]->plaintext,
-                "type"               => "simple",
-                "status"             => "publish",
-                "downloadable"       => false,
-                "virtual"            => false,
-                "permalink"          => $this->remoteShop . "/shop/" . $slug,
-                "sku"                => "",
-                "price"              => "",
-                "regular_price"      => "",
-                "sale_price"         => null,
-                "price_html"         => "",
-                "taxable"            => true,
-                "tax_status"         => "taxable",
-                "tax_class"          => "",
-                "managing_stock"     => false,
-                "stock_quantity"     => null,
-                "in_stock"           => true,
-                "backorders_allowed" => false,
-                "backordered"        => false,
-                "sold_individually"  => false,
-                "purchaseable"       => false,
-                "featured"           => false,
-                "visible"            => true,
-                "catalog_visibility" => "visible",
-                "on_sale"            => false,
-                "product_url"        => "",
-                "button_text"        => "",
-                "weight"             => null,
-                "shipping_required"  => true,
-                "shipping_taxable"   => true,
-                "shipping_class"     => "",
-                "shipping_class_id"  => null,
-                "description"        => $htm->find(".content")[0]->innertext,
-                "short_description"  => "",
-                "reviews_allowed"    => true,
-                "average_rating"     => "0.00",
-                "rating_count"       => 0,
-                "related_ids"        => [],
-                "upsell_ids"         => [],
-                "cross_sell_ids"     => [],
-                "parent_id"          => 0,
-                "categories"         => $cat["product_category"]["slug"],
-                "tags"               => [],
-                "attributes"         => [],
-                "downloads"          => [],
-                "download_limit"     => -1,
-                "download_expiry"    => -1,
-                "download_type"      => "standard",
-                "purchase_note"      => "",
-                "total_sales"        => 0,
-                "variations"         => [],
-                "parent"             => [],
-                "grouped_products"   => [],
-                "menu_order"         => 0,
-                "images"             => [[
-                    // "id"         => 14,
-                    // "created_at" => "2017-05-11T08:27:02Z",
-                    // "updated_at" => "2017-05-11T08:27:02Z",
-                    "src"      => $this->remoteShop . "/wp-content/uploads/2017/05/" . $slug . ".jpg",
-                    "title"    => $slug,
-                    "alt"      => $title,
-                    "position" => 0,
-                ]],
+            "title"              => $htm->find(".title")[0]->plaintext,
+            "type"               => "simple",
+            "status"             => "publish",
+            "downloadable"       => false,
+            "virtual"            => false,
+            "permalink"          => $this->remoteShop . "/shop/" . $slug,
+            "sku"                => "",
+            "price"              => "",
+            "regular_price"      => "",
+            "sale_price"         => null,
+            "price_html"         => "",
+            "taxable"            => true,
+            "tax_status"         => "taxable",
+            "tax_class"          => "",
+            "managing_stock"     => false,
+            "stock_quantity"     => null,
+            "in_stock"           => true,
+            "backorders_allowed" => false,
+            "backordered"        => false,
+            "sold_individually"  => false,
+            "purchaseable"       => false,
+            "featured"           => false,
+            "visible"            => true,
+            "catalog_visibility" => "visible",
+            "on_sale"            => false,
+            "product_url"        => "",
+            "button_text"        => "",
+            "weight"             => null,
+            "shipping_required"  => true,
+            "shipping_taxable"   => true,
+            "shipping_class"     => "",
+            "shipping_class_id"  => null,
+            "description"        => $htm->find(".content")[0]->innertext,
+            "short_description"  => "",
+            "reviews_allowed"    => true,
+            "average_rating"     => "0.00",
+            "rating_count"       => 0,
+            "related_ids"        => [],
+            "upsell_ids"         => [],
+            "cross_sell_ids"     => [],
+            "parent_id"          => 0,
+            "categories"         => $cat["product_category"]["slug"],
+            "tags"               => [],
+            "attributes"         => [],
+            "downloads"          => [],
+            "download_limit"     => -1,
+            "download_expiry"    => -1,
+            "download_type"      => "standard",
+            "purchase_note"      => "",
+            "total_sales"        => 0,
+            "variations"         => [],
+            "parent"             => [],
+            "grouped_products"   => [],
+            "menu_order"         => 0,
+            "images"             => [[
+            // "id"         => 14,
+            // "created_at" => "2017-05-11T08:27:02Z",
+            // "updated_at" => "2017-05-11T08:27:02Z",
+            "src"      => $this->remoteShop . "/wp-content/uploads/2017/05/" . $slug . ".jpg",
+            "title"    => $slug,
+            "alt"      => $title,
+            "position" => 0,
+            ]],
             ];
             $this->nomad->post("products", $data);
         }
     }
-
+    
     public function parseMetallApi()
     {
         // dd($this->nomad->get("products/categories"));
         $metalCategoryRus = "Металлоконструкции";
         // create categorie fpr metall
         $metalCategory["product_category"] = [
-            "name"   => "Металлоконструкции",
-            "slug"   => Rutils::translit()->slugify($metalCategoryRus),
-            "parent" => 0,
+        "name"   => "Металлоконструкции",
+        "slug"   => Rutils::translit()->slugify($metalCategoryRus),
+        "parent" => 0,
         ];
         // create metall category
         // $this->nomad->post("products/categories", $metalCategory);
-
+        
         include_once "simplehtmldom/simple_html_dom.php";
         $stroiMetall = "http://www.npommz.ru/stroitelnye-metallokonstrukcii";
         $products    = []; //products
-
+        
         $stroiHtml = file_get_html($stroiMetall);
-
+        
         // crete metall
         $metall                = [];
         $metall["title"]       = $stroiHtml->find(".title")[0]->plaintext;
         $metall["description"] = $stroiHtml->find(".content")[0]->innertext;
         $metall["categories"]  = [$metalCategory["product_category"]["slug"]];
         $products[]            = $metall;
-
+        
         // create ns
         $nsLink            = "http://www.npommz.ru/nestandartnye-metallokonstrukcii";
         $nsHtml            = file_get_html($nsLink);
@@ -316,86 +415,86 @@ class WoocomerceController extends Controller
         $ns["description"] = $nsHtml->find(".content")[0]->innertext;
         $ns["categories"]  = [$metalCategory["product_category"]["slug"]];
         $products[]        = $ns;
-
+        
         // dd($products);
-
+        
         foreach ($products as $key) {
             $keySlug         = Rutils::translit()->slugify($key["title"]);
             $data            = [];
             $data["product"] = [
-                "title"              => $key['title'],
-                "type"               => "simple",
-                "status"             => "publish",
-                "downloadable"       => false,
-                "virtual"            => false,
-                "permalink"          => $this->remoteShop . "/shop/" . $keySlug,
-                "sku"                => "",
-                "price"              => "",
-                "regular_price"      => "",
-                "sale_price"         => null,
-                "price_html"         => "",
-                "taxable"            => true,
-                "tax_status"         => "taxable",
-                "tax_class"          => "",
-                "managing_stock"     => false,
-                "stock_quantity"     => null,
-                "in_stock"           => true,
-                "backorders_allowed" => false,
-                "backordered"        => false,
-                "sold_individually"  => false,
-                "purchaseable"       => false,
-                "featured"           => false,
-                "visible"            => true,
-                "catalog_visibility" => "visible",
-                "on_sale"            => false,
-                "product_url"        => "",
-                "button_text"        => "",
-                "weight"             => null,
-                "shipping_required"  => true,
-                "shipping_taxable"   => true,
-                "shipping_class"     => "",
-                "shipping_class_id"  => null,
-                "description"        => $key['description'],
-                "short_description"  => "",
-                "reviews_allowed"    => true,
-                "average_rating"     => "0.00",
-                "rating_count"       => 0,
-                "related_ids"        => [],
-                "upsell_ids"         => [],
-                "cross_sell_ids"     => [],
-                "parent_id"          => 0,
-                "categories"         => $key["categories"],
-                "tags"               => [],
-                "attributes"         => [],
-                "downloads"          => [],
-                "download_limit"     => -1,
-                "download_expiry"    => -1,
-                "download_type"      => "standard",
-                "purchase_note"      => "",
-                "total_sales"        => 0,
-                "variations"         => [],
-                "parent"             => [],
-                "grouped_products"   => [],
-                "menu_order"         => 0,
-                "images"             => [[
-                    // "id"         => 14,
-                    // "created_at" => "2017-05-11T08:27:02Z",
-                    // "updated_at" => "2017-05-11T08:27:02Z",
-                    "src"      => $this->remoteShop . "/wp-content/uploads/" . $imageName,
-                    "title"    => $slugified,
-                    "alt"      => $itemTitle,
-                    "position" => 0,
-                ]],
+            "title"              => $key['title'],
+            "type"               => "simple",
+            "status"             => "publish",
+            "downloadable"       => false,
+            "virtual"            => false,
+            "permalink"          => $this->remoteShop . "/shop/" . $keySlug,
+            "sku"                => "",
+            "price"              => "",
+            "regular_price"      => "",
+            "sale_price"         => null,
+            "price_html"         => "",
+            "taxable"            => true,
+            "tax_status"         => "taxable",
+            "tax_class"          => "",
+            "managing_stock"     => false,
+            "stock_quantity"     => null,
+            "in_stock"           => true,
+            "backorders_allowed" => false,
+            "backordered"        => false,
+            "sold_individually"  => false,
+            "purchaseable"       => false,
+            "featured"           => false,
+            "visible"            => true,
+            "catalog_visibility" => "visible",
+            "on_sale"            => false,
+            "product_url"        => "",
+            "button_text"        => "",
+            "weight"             => null,
+            "shipping_required"  => true,
+            "shipping_taxable"   => true,
+            "shipping_class"     => "",
+            "shipping_class_id"  => null,
+            "description"        => $key['description'],
+            "short_description"  => "",
+            "reviews_allowed"    => true,
+            "average_rating"     => "0.00",
+            "rating_count"       => 0,
+            "related_ids"        => [],
+            "upsell_ids"         => [],
+            "cross_sell_ids"     => [],
+            "parent_id"          => 0,
+            "categories"         => $key["categories"],
+            "tags"               => [],
+            "attributes"         => [],
+            "downloads"          => [],
+            "download_limit"     => -1,
+            "download_expiry"    => -1,
+            "download_type"      => "standard",
+            "purchase_note"      => "",
+            "total_sales"        => 0,
+            "variations"         => [],
+            "parent"             => [],
+            "grouped_products"   => [],
+            "menu_order"         => 0,
+            "images"             => [[
+            // "id"         => 14,
+            // "created_at" => "2017-05-11T08:27:02Z",
+            // "updated_at" => "2017-05-11T08:27:02Z",
+            "src"      => $this->remoteShop . "/wp-content/uploads/" . $imageName,
+            "title"    => $slugified,
+            "alt"      => $itemTitle,
+            "position" => 0,
+            ]],
             ];
             $this->nomad->post("products", $data);
         }
-
+        
     }
-
+    
     /**
-     * parse optimum svet and paste data to wordpress
-     * @return [type] [description]
-     */
+    * parse optimum svet and paste data to wordpress
+    * @return [type] [description]
+    */
     public function parseSvetApi()
     {
         set_time_limit(0);
@@ -403,100 +502,100 @@ class WoocomerceController extends Controller
         $base_url = "http://www.svet.optimum74.ru";
         $html     = file_get_html("http://www.svet.optimum74.ru/catalog/");
         $links    = [];
-
+        
         foreach ($html->find("ul.products-list li a") as $link) {
             // add all links to catalog items to array
             $links[] = $link->href;
             \Log::info('"Just another parse ink for svet is $link"');
-        }
-
+            }
+        
         $items = [];
-
+        
         foreach ($links as $link) {
             // create base link to parse
             $link_html = file_get_html($base_url . $link);
-
+            
             //items title
             $itemTitle = $link_html->find("#content h1")[0]->plaintext; //find items title
             \Log::info('Product to add: ' . $itemTitle);
-
+            
             $imgSrc    = $link_html->find('.img-holder img')[0]->attr['src'];
             $imageName = '2017/05/' . Rutils::translit()->slugify($itemTitle) . '.png';
             $slugified = Rutils::translit()->slugify($itemTitle);
             // \Storage::put($imageName, file_get_contents($base_url . $imgSrc));
-
+            
             $data["product"] = [
-                "title"              => "$itemTitle",
-                "type"               => "simple",
-                "status"             => "publish",
-                "downloadable"       => false,
-                "virtual"            => false,
-                "permalink"          => $this->remoteShop . "/shop/" . $slugified,
-                "sku"                => "",
-                "price"              => "",
-                "regular_price"      => "",
-                "sale_price"         => null,
-                "price_html"         => "",
-                "taxable"            => true,
-                "tax_status"         => "taxable",
-                "tax_class"          => "",
-                "managing_stock"     => false,
-                "stock_quantity"     => null,
-                "in_stock"           => true,
-                "backorders_allowed" => false,
-                "backordered"        => false,
-                "sold_individually"  => false,
-                "purchaseable"       => false,
-                "featured"           => false,
-                "visible"            => true,
-                "catalog_visibility" => "visible",
-                "on_sale"            => false,
-                "product_url"        => "",
-                "button_text"        => "",
-                "weight"             => null,
-                "shipping_required"  => true,
-                "shipping_taxable"   => true,
-                "shipping_class"     => "",
-                "shipping_class_id"  => null,
-                "description"        => $link_html->find(".item .info")[0]->outertext,
-                "short_description"  => "",
-                "reviews_allowed"    => true,
-                "average_rating"     => "0.00",
-                "rating_count"       => 0,
-                "related_ids"        => [],
-                "upsell_ids"         => [],
-                "cross_sell_ids"     => [],
-                "parent_id"          => 0,
-                "categories"         => [],
-                "tags"               => [],
-                "images"             => [[
-                    // "id"         => 14,
-                    // "created_at" => "2017-05-11T08:27:02Z",
-                    // "updated_at" => "2017-05-11T08:27:02Z",
-                    "src"      => $this->remoteShop . "/wp-content/uploads/" . $imageName,
-                    "title"    => $slugified,
-                    "alt"      => $itemTitle,
-                    "position" => 0,
-                ]],
-                // "featured_src"       => "http://localhost/nomad/wp-content/uploads/2017/05/ZDMcAkCVqk.jpg",
-                "featured_src"       => $this->remoteShop . "/wp-content/uploads/" . $imageName,
-                "attributes"         => [],
-                "downloads"          => [],
-                "download_limit"     => -1,
-                "download_expiry"    => -1,
-                "download_type"      => "standard",
-                "purchase_note"      => "",
-                "total_sales"        => 0,
-                "variations"         => [],
-                "parent"             => [],
-                "grouped_products"   => [],
-                "menu_order"         => 0,
+            "title"              => "$itemTitle",
+            "type"               => "simple",
+            "status"             => "publish",
+            "downloadable"       => false,
+            "virtual"            => false,
+            "permalink"          => $this->remoteShop . "/shop/" . $slugified,
+            "sku"                => "",
+            "price"              => "",
+            "regular_price"      => "",
+            "sale_price"         => null,
+            "price_html"         => "",
+            "taxable"            => true,
+            "tax_status"         => "taxable",
+            "tax_class"          => "",
+            "managing_stock"     => false,
+            "stock_quantity"     => null,
+            "in_stock"           => true,
+            "backorders_allowed" => false,
+            "backordered"        => false,
+            "sold_individually"  => false,
+            "purchaseable"       => false,
+            "featured"           => false,
+            "visible"            => true,
+            "catalog_visibility" => "visible",
+            "on_sale"            => false,
+            "product_url"        => "",
+            "button_text"        => "",
+            "weight"             => null,
+            "shipping_required"  => true,
+            "shipping_taxable"   => true,
+            "shipping_class"     => "",
+            "shipping_class_id"  => null,
+            "description"        => $link_html->find(".item .info")[0]->outertext,
+            "short_description"  => "",
+            "reviews_allowed"    => true,
+            "average_rating"     => "0.00",
+            "rating_count"       => 0,
+            "related_ids"        => [],
+            "upsell_ids"         => [],
+            "cross_sell_ids"     => [],
+            "parent_id"          => 0,
+            "categories"         => [],
+            "tags"               => [],
+            "images"             => [[
+            // "id"         => 14,
+            // "created_at" => "2017-05-11T08:27:02Z",
+            // "updated_at" => "2017-05-11T08:27:02Z",
+            "src"      => $this->remoteShop . "/wp-content/uploads/" . $imageName,
+            "title"    => $slugified,
+            "alt"      => $itemTitle,
+            "position" => 0,
+            ]],
+            // "featured_src"       => "http://localhost/nomad/wp-content/uploads/2017/05/ZDMcAkCVqk.jpg",
+            "featured_src"       => $this->remoteShop . "/wp-content/uploads/" . $imageName,
+            "attributes"         => [],
+            "downloads"          => [],
+            "download_limit"     => -1,
+            "download_expiry"    => -1,
+            "download_type"      => "standard",
+            "purchase_note"      => "",
+            "total_sales"        => 0,
+            "variations"         => [],
+            "parent"             => [],
+            "grouped_products"   => [],
+            "menu_order"         => 0,
             ];
             $this->nomad->post("products", $data);
         }
-
+        
     }
-
+    
     public function testFtp()
     {
         $ftp = new FtpClient();
@@ -505,44 +604,44 @@ class WoocomerceController extends Controller
         // dd(base_path());
         $ftp->putAll(base_path() . "\storage\app\public\wp-upload\\2017\\05", "nomadsynergy.kz/wp-content/uploads/2017/05", FTP_BINARY);
     }
-
+    
     public function saveRequest(Request $req)
     {}
-
+    
     public function woo()
     {
-
+        
     }
-
+    
     public function restApiPost()
     {
         $params = array(
-            "title"   => "Hello Updated World!",
-            "content" => "Howdy updated content.",
-            "type"    => "product",
+        "title"   => "Hello Updated World!",
+        "content" => "Howdy updated content.",
+        "type"    => "product",
         );
         // dd(json_encode($params));
         $response = $this->restApiClient->post('posts',
-            ['body' => json_encode($params)]
+        ['body' => json_encode($params)]
         );
         echo "<pre>";
         echo $response->getBody();
     }
-
+    
     /**
-     * claer all products from local test database
-     * @return [type] [description]
-     */
+    * claer all products from local test database
+    * @return [type] [description]
+    */
     public function clearProducts()
     {
         set_time_limit(0);
         $d           = $this->woocommerce->get("products");
         $idsToDelete = [];
-
+        
         foreach ($d["products"] as $product) {
             $idsToDelete[] = $product["id"];
         }
-
+        
         foreach ($idsToDelete as $key) {
             $this->woocommerce->delete("products/$key", ["force" => true]);
         }
@@ -557,5 +656,5 @@ class WoocomerceController extends Controller
         }
         return $links;
     }
-
+    
 }
