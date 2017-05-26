@@ -135,7 +135,7 @@ class WoocomerceController extends Controller
                 dd("404");
             } else {
                 
-                $imgSrc    = $link_html->find('.img-holder img')[0]->attr['src'];
+                $imgSrc    = $product->find('.img-holder img')[0]->attr['src'];
                 $imageName = '2017/05/' . Rutils::translit()->slugify($itemTitle) . '.png';
                 $slugified = Rutils::translit()->slugify($itemTitle);
                 $title = $product->find("h1")[0]->plaintext;
