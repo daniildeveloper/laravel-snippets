@@ -16,6 +16,15 @@
     "html2canvas": "^0.4.1",
     "fine-uploader": "^5.13.0",
     "mediaelement": "^4.1.1",
-    "jPlayer": "jplayer#^2.9.2"
+    "jPlayer": "jplayer#^2.9.2",
+    "reveal.js": "^3.5.0",
+    "font-awesome": "fontawesome#^4.7.0",
+    "uikit": "^2.27.4",
+    "moment": "momentjs#^2.18.1",
+    "fullcalendar": "^3.4.0",
+    "AdminLTE": "admin-lte#^2.3.11",
+    "blur-admin": "*",
+    "chart.js": "^2.6.0",
+    "vis": "^4.20.0"
   }
 }
