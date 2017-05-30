@@ -95,15 +95,6 @@ class WoocomerceController extends Controller
 
         $secondChildHrefs = [];
         foreach ($menu as $menuItem) {
-            // get first child category name
-            // $catName = $menuItem->find("span.caption")[0]->innertext;
-            // uncomment for production parsing
-            // save first child category
-            // $sizFirstChildCategory            = new Categories();
-            // $sizFirstChildCategory->name      = $catName;
-            // $sizFirstChildCategory->parent_id = $this->sizCategoryId;
-            // $sizFirstChildCategory->save();
-            //category id
             $sizFirstChildCategoryId = isset($sizFirstChildCategory) ? $sizFirstChildCategory->id : 1;
 
             // link to shop preview of category
@@ -118,124 +109,134 @@ class WoocomerceController extends Controller
                 $secondChildHrefs[] = $sccl->href;
             }
             // dd($secondChildCategoriesList);
-        }
-        $productItemsHrefs = [];
-        // parse just one catalog item
+            // dd($secondChildHrefs);
+            $productItemsHrefs = [];
+            // parse just one catalog item
 
-        // parser all catalog items
-        foreach ($secondChildHrefs as $p) {
+            // parser all catalog items
+            foreach ($secondChildHrefs as $p) {
 
-            $toParse           = $secondChildHrefs[0];
-            $catalogItems      = $client->get($base_url_single . $toParse)->getBody();
-            $catalogItems      = str_get_html($catalogItems);
-            $catalogItemsHrefs = $catalogItems->find(".catalog-container .product_list .product-link .product-image a");
-            foreach ($catalogItemsHrefs as $key) {
-                $productItemsHrefs[] = $key->href;
-                \Log::info('product item href: ' . $key->href);
-            }
-        }
-        \Log::info('Second child hrefs are ready to use');
-        // dd($productItemsHrefs);
-        unset($secondChildHrefs);
-        unset($transformedMenu);
-        foreach ($productItemsHrefs as $productHref) {
-
-            //parse each items
-            // dd($productHref);
-            \Log::info('product' . $productHref);
-            $product = $client->get($base_url_single . $productHref);
-
-            if ($product->getStatusCode() === 200) {
-                $product = str_get_html($product->getBody());
-
-                $title = $product->find("h1")[0]->plaintext;
-                \Log::info('Title is ' . $title);
-                $slug      = Rutils::translit()->slugify($title);
-                $imgSrc    = $product->find(".bx_bigimages_aligner_outer img")[0]->attr["src"];
-                $imageName = "2017/05" . $slug . ".jpg";
-                \Storage::put($imageName, file_get_contents($base_url_single . $imgSrc));
-
-                $ftp = new FtpClient();
-                $ftp->connect(env("SMARTSOL_FTP_HOST"));
-                $ftp->login(env("SMARTSOL_FTP_USER"), env("SMARTSOL_FTP_PASS"));
-                // dd(base_path());
-                $ftp->putAll(base_path() . "\public\wordpress\wp-content\wp-upload\\2017\\05\\emost", "/var/www/as/wp-content/uploads/2017/05", FTP_BINARY);
-
-                $infoArray = $product->find(".item_info_section");
-                $info      = "";
-                foreach ($infoArray as $i) {
-                    $info .= $i;
+                $toParse           = $secondChildHrefs[0];
+                $catalogItems      = $client->get($base_url_single . $toParse)->getBody();
+                $catalogItems      = str_get_html($catalogItems);
+                $catalogItemsHrefs = $catalogItems->find(".catalog-container .product_list .product-link .product-image a");
+                foreach ($catalogItemsHrefs as $key) {
+                    $productItemsHrefs[] = $key->href;
+                    \Log::info('product item href: ' . $key->href);
                 }
+                // dd($productItemsHrefs);
+                
+                foreach ($productItemsHrefs as $productHref) {
+                    $categories = [];
+                    $categoriesExploded = explode("/", $productHref);
+                    $categories[] = $categoriesExploded[2];
+                    $categories[] = $categoriesExploded[3];
+                    // dd($categoriesExploded);
 
-                $data["product"] = [
-                    "title"              => $title,
-                    "type"               => "simple",
-                    "status"             => "publish",
-                    "downloadable"       => false,
-                    "virtual"            => false,
-                    "permalink"          => $shop . "/shop/" . $slug,
-                    "sku"                => "",
-                    "price"              => "",
-                    "regular_price"      => "",
-                    "sale_price"         => null,
-                    "price_html"         => "",
-                    "taxable"            => true,
-                    "tax_status"         => "taxable",
-                    "tax_class"          => "",
-                    "managing_stock"     => false,
-                    "stock_quantity"     => null,
-                    "in_stock"           => true,
-                    "backorders_allowed" => false,
-                    "backordered"        => false,
-                    "sold_individually"  => false,
-                    "purchaseable"       => false,
-                    "featured"           => false,
-                    "visible"            => true,
-                    "catalog_visibility" => "visible",
-                    "on_sale"            => false,
-                    "product_url"        => "",
-                    "button_text"        => "",
-                    "weight"             => null,
-                    "shipping_required"  => true,
-                    "shipping_taxable"   => true,
-                    "shipping_class"     => "",
-                    "shipping_class_id"  => null,
-                    "description"        => $info,
-                    "short_description"  => "",
-                    "reviews_allowed"    => true,
-                    "average_rating"     => "0.00",
-                    "rating_count"       => 0,
-                    "related_ids"        => [],
-                    "upsell_ids"         => [],
-                    "cross_sell_ids"     => [],
-                    "parent_id"          => 0,
-                    "categories"         => [],
-                    "tags"               => [],
-                    "attributes"         => [],
-                    "downloads"          => [],
-                    "download_limit"     => -1,
-                    "download_expiry"    => -1,
-                    "download_type"      => "standard",
-                    "purchase_note"      => "",
-                    "total_sales"        => 0,
-                    "variations"         => [],
-                    "parent"             => [],
-                    "grouped_products"   => [],
-                    "menu_order"         => 0,
-                    "images"             => [[
-                        // "id"         => 14,
-                        // "created_at" => "2017-05-11T08:27:02Z",
-                        // "updated_at" => "2017-05-11T08:27:02Z",
-                        "src"      => $shop . "/wp-content/uploads/2017/05/" . $slug . ".jpg",
-                        "title"    => $slug,
-                        "alt"      => $title,
-                        "position" => 0,
-                    ]],
-                ];
-                $this->nomad->post("products", $data);
-                dd("Succesfly parsed firstly");
+                    //parse each items
+                    // dd($productHref);
+                    \Log::info('product' . $productHref);
+                    $product = $client->get($base_url_single . $productHref);
+
+                    if ($product->getStatusCode() === 200) {
+                        $product = str_get_html($product->getBody());
+
+                        $title = $product->find("h1")[0]->plaintext;
+                        \Log::info('Title is ' . $title);
+                        $slug      = Rutils::translit()->slugify($title);
+                        $imgSrc    = $product->find(".bx_bigimages_aligner_outer img")[0]->attr["src"];
+                        $imageName = "2017/05/siz" . $slug . ".jpg";
+                        \Storage::put($imageName, file_get_contents($base_url_single . $imgSrc));
+
+                        $ftp = new FtpClient();
+                        $ftp->connect(env("SMARTSOL_FTP_HOST"));
+                        $ftp->login(env("SMARTSOL_FTP_USER"), env("SMARTSOL_FTP_PASS"));
+                        // dd(base_path());
+                        $ftp->putAll(base_path() . "\public\wordpress\wp-content\wp-upload\\2017\\05\\", "/nomadsynergy.kz/wp-content/uploads/2017/05", FTP_BINARY);
+
+                        $infoArray = $product->find(".item_info_section");
+                        $info      = "";
+                        foreach ($infoArray as $i) {
+                            $info .= $i->innertext;
+                        }
+
+                        $data["product"] = [
+                            "title"              => $title,
+                            "type"               => "simple",
+                            "status"             => "publish",
+                            "downloadable"       => false,
+                            "virtual"            => false,
+                            "permalink"          => $shop . "/shop/" . $slug,
+                            "sku"                => "",
+                            "price"              => "",
+                            "regular_price"      => "",
+                            "sale_price"         => null,
+                            "price_html"         => "",
+                            "taxable"            => true,
+                            "tax_status"         => "taxable",
+                            "tax_class"          => "",
+                            "managing_stock"     => false,
+                            "stock_quantity"     => null,
+                            "in_stock"           => true,
+                            "backorders_allowed" => false,
+                            "backordered"        => false,
+                            "sold_individually"  => false,
+                            "purchaseable"       => false,
+                            "featured"           => false,
+                            "visible"            => true,
+                            "catalog_visibility" => "visible",
+                            "on_sale"            => false,
+                            "product_url"        => "",
+                            "button_text"        => "",
+                            "weight"             => null,
+                            "shipping_required"  => true,
+                            "shipping_taxable"   => true,
+                            "shipping_class"     => "",
+                            "shipping_class_id"  => null,
+                            "description"        => $info,
+                            "short_description"  => "",
+                            "reviews_allowed"    => true,
+                            "average_rating"     => "0.00",
+                            "rating_count"       => 0,
+                            "related_ids"        => [],
+                            "upsell_ids"         => [],
+                            "cross_sell_ids"     => [],
+                            "parent_id"          => 0,
+                            "categories"         => $categories,
+                            "tags"               => [],
+                            "attributes"         => [],
+                            "downloads"          => [],
+                            "download_limit"     => -1,
+                            "download_expiry"    => -1,
+                            "download_type"      => "standard",
+                            "purchase_note"      => "",
+                            "total_sales"        => 0,
+                            "variations"         => [],
+                            "parent"             => [],
+                            "grouped_products"   => [],
+                            "menu_order"         => 0,
+                            "images"             => [[
+                                // "id"         => 14,
+                                // "created_at" => "2017-05-11T08:27:02Z",
+                                // "updated_at" => "2017-05-11T08:27:02Z",
+                                "src"      => $shop . "/wp-content/uploads/" . $imageName,
+                                "title"    => $slug,
+                                "alt"      => $title,
+                                "position" => 0,
+                            ]],
+                        ];
+                        $this->nomad->post("products", $data);
+                        dd("Succesfly parsed firstly");
+                    }
+                }
             }
+            \Log::info('Second child hrefs are ready to use');
+            // dd($productItemsHrefs);
+            unset($secondChildHrefs);
+            unset($transformedMenu);
+
         }
+
     }
 
     /**

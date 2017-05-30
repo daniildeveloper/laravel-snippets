@@ -182,6 +182,9 @@ return [
         App\Providers\RouteServiceProvider::class,
         Pixelpeter\Woocommerce\WoocommerceServiceProvider::class,
 
+        // excel
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
         // Storages Api
         Anchu\Ftp\FtpServiceProvider::class,
 
@@ -209,6 +212,7 @@ return [
         'Cookie'       => Illuminate\Support\Facades\Cookie::class,
         'Crypt'        => Illuminate\Support\Facades\Crypt::class,
         'Epay'         => \Dosarkz\EPayKazCom\Facades\Epay::class,
+        'Excel'        => Maatwebsite\Excel\Facades\Excel::class,
         'DB'           => Illuminate\Support\Facades\DB::class,
         'Eloquent'     => Illuminate\Database\Eloquent\Model::class,
         'Event'        => Illuminate\Support\Facades\Event::class,

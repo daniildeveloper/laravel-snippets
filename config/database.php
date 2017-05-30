@@ -103,6 +103,19 @@ return [
             'strict'    => false,
             'engine'    => null,
         ],
+        "almatysports"     => [
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'database'  => 'almatysports',
+            "port"      => "3306",
+            'username'  => 'root',
+            'password'  => '',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            // 'prefix'    => '5Ncrzo0_',
+            'strict'    => false,
+            'engine'    => null,
+        ],
 
     ],
 
