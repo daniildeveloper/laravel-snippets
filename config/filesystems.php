@@ -45,7 +45,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('../public/wordpress/wp-content/wp-upload/'),
+            'root' => storage_path('../public/nomad/'),
         ],
 
         'public' => [

@@ -13,6 +13,7 @@ Homestead.yaml
 #submodules
 /public/another/mautic/vendor
 /public/another/shopware/vendor
+/public/nomad
 
 #remove simpehtmldom instances
 app/Http/Controllers/Wordpress/simplehtmldom
