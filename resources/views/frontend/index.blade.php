@@ -56,6 +56,14 @@ Frontend
         <li><a href="{{url("frontend/map/yaplacepicker")}}">Yandex Maps Place Picker</a></li>
       </ul>
     </div>
+
+    {{-- jquery plugins  --}}
+    <div class="col-md-3">
+      <h4>Jquery Plugins</h4>
+      <ul>
+        <li><a href="{{url("frontend/jquery/countdown")}}">Countdown</a></li>
+      </ul>
+    </div>
   </div>
   
 </div>

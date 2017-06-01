@@ -25,6 +25,8 @@
     "AdminLTE": "admin-lte#^2.3.11",
     "blur-admin": "*",
     "chart.js": "^2.6.0",
-    "vis": "^4.20.0"
+    "vis": "^4.20.0",
+    "jquery-countdown": "^0.1.4",
+    "jquery.countdown": "^2.2.0"
   }
 }
