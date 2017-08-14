@@ -10,7 +10,19 @@ class TestingIdeasController extends Controller
 {
     public function test(Request $request)
     {
-        Mail::to("daniilborowkow@yandex.ru")->send(new TestMail());
+        $pay = \Epay::basicAuth([
+            'order_id' => 01111111111,
+            'currency' => '398',
+            'amount'   => 9999,
+            'hashed'   => true,
+        ]);
+
+        $payUrl = $pay->generateUrl();
+        dd(urldecode($payUrl));
+        return view('snippets.pay.epay.paytest', [
+                "content" => $payUrl
+            ]);
+
     }
 
     public function sendPay()
@@ -22,7 +34,12 @@ class TestingIdeasController extends Controller
             'hashed'   => true,
         ]);
 
-        $pay->generateUrl();
-        dd($pay);
+        $payUrl = $pay->generateUrl();
+        return view('snippets.pay.epay.paytest');
+    }
+
+    public function testMail()
+    {
+        Mail::to("daniilborowkow@yandex.ru")->send(new TestMail());
     }
 }

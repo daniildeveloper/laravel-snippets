@@ -13,10 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(NomadLaravelSeeder::class);
+        // $this->call(NomadLaravelSeeder::class);
         // $this->call(NomadSeeder::class);
-        // $this->call(UsersTableSeeder::class);
-        // $this->call(ProductTableSeeder::class);
-        // $this->call(HaypItemsSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(ProductTableSeeder::class);
+        $this->call(HaypItemsSeeder::class);
     }
 }
